@@ -1,0 +1,49 @@
+[SESSION] old=none new=s_1788598896673_zm6fasdy
+[CONVERSATION_GATEWAY] {"inputLength":12,"source":"host-demo","entryMode":"plan","entities":{"destinations":[],"cities":[],"days":1,"originCity":null}}
+[SESSION] old=s_1788598896673_zm6fasdy new=s_1788598896673_zm6fasdy
+[TOURIST_ENTITY_TRACE] {"inputLength":12,"destinations":["shapotou"],"cities":["中卫"],"originCity":null,"companions":[],"budget":null,"days":1,"constraints":["low_walking"],"preferences":[]}
+[CONTEXT_PRIORITY_TRACE] inputLength=12 history_count=0 current_intent=TRIP_PLANNING history_intent=NONE
+[AI_PIPELINE_TRACE] {"sessionId":"s_1788598896673_zm6fasdy","entry_mode":"plan","inputLength":12,"historyCount":0,"intent":"TRIP_PLANNING","taskType":"TRIP_PLANNING","behavior":"TRIP_PLAN","resolvedCharacter":"shaHu","selected_agent":"sand-fox","prompt_type":"trip_plan","messages_count":3,"model":"hy3","final_response_type":"pending"}
+[REAL_AI_TRACE] inputLength=12 page=pages/trip/index.js sessionId=s_1788598896673_zm6fasdy historyCount=0 intent=TRIP_PLANNING behavior=TRIP_PLAN
+[AI][RESPONSE_ROUTER] {
+  intent: 'TRIP_PLANNING',
+  response_behavior: 'TRIP_PLAN',
+  sessionId: 's_1788598896673_zm6fasdy'
+}
+[AI_PIPELINE] inputLength=12 intent=TRIP_PLANNING behavior=TRIP_PLAN selected_agent=sand-fox prompt_type=trip_plan final_mode=itinerary_card
+[TRIP_FLOW][ORCHESTRATOR_START] { task: 'plan', promptLength: 158 }
+[TRIP_FLOW][CLOUD_FAIL] { reason: 'CLOUD_AI_UNAVAILABLE' }
+[TRIP_FLOW][FALLBACK] { task: 'plan' }
+[SESSION] old=s_1788598896673_zm6fasdy new=s_1788598896673_zm6fasdy
+[AI_PIPELINE_TRACE] {"sessionId":"s_1788598896673_zm6fasdy","entry_mode":"plan","inputLength":12,"historyCount":0,"intent":"TRIP_PLANNING","taskType":"TRIP_PLANNING","behavior":"TRIP_PLAN","resolvedCharacter":"shaHu","selected_agent":"sand-fox","prompt_type":"trip_plan","messages_count":3,"model":"hy3","final_response_type":"TRIP_PLAN"}
+[FINAL_RESPONSE_TRACE] inputLength=12 intent=TRIP_PLANNING behavior=TRIP_PLAN agent=sand-fox prompt_type=trip_plan formatter=timeline_route_card image_renderer=trip_route_images final_type=TRIP_OUTPUT
+[CONVERSATION_GATEWAY] {"inputLength":10,"source":"host-story","entryMode":"guide","entities":{"destinations":[],"cities":[],"days":null,"originCity":null}}
+[SESSION] old=s_1788598896673_zm6fasdy new=s_1788598896673_zm6fasdy
+[TOURIST_ENTITY_TRACE] {"inputLength":10,"destinations":["shapotou"],"cities":["中卫"],"originCity":null,"companions":[],"budget":null,"days":null,"constraints":[],"preferences":["history_culture"]}
+[CONTEXT_PRIORITY_TRACE] inputLength=10 history_count=1 current_intent=CULTURE_QA history_intent=TRIP_PLANNING
+[AI_PIPELINE_TRACE] {"sessionId":"s_1788598896673_zm6fasdy","entry_mode":"guide","inputLength":10,"historyCount":1,"intent":"CULTURE_QA","taskType":"CULTURE_QA","behavior":"STORY_EXPLANATION","resolvedCharacter":"luoTuo","selected_agent":"camel","prompt_type":"story_answer","messages_count":3,"model":"hy3","final_response_type":"pending"}
+[REAL_AI_TRACE] inputLength=10 page=pages/trip/index.js sessionId=s_1788598896673_zm6fasdy historyCount=2 intent=CULTURE_QA behavior=STORY_EXPLANATION
+[AI][RESPONSE_ROUTER] {
+  intent: 'CULTURE_QA',
+  response_behavior: 'STORY_EXPLANATION',
+  sessionId: 's_1788598896673_zm6fasdy'
+}
+[PET][QUESTION] { inputLength: 10 }
+[PET][ROUTER] CULTURE_AGENT
+[AI_PIPELINE] inputLength=10 intent=CULTURE_QA behavior=STORY_EXPLANATION selected_agent=camel resolvedCharacter=luoTuo prompt_type=story_answer final_mode=text_first
+[REGIONAL_SCOPE_RUNTIME] {
+  queryScope: 'NINGXIA_ADMINISTRATIVE_REGION',
+  retrievedCount: 39,
+  topicMatchedCount: 39,
+  regionMatchedCount: 36,
+  entityValidatedCount: 36,
+  selectedKnowledgeCount: 1,
+  rejectedCrossRegionCount: 3
+}
+[PET][KNOWLEDGE] grounded { count: 1 }
+[PET][FALLBACK] local agent activated { reason: 'CLOUD_AI_UNAVAILABLE' }
+[SESSION] old=s_1788598896673_zm6fasdy new=s_1788598896673_zm6fasdy
+[AI_PIPELINE_TRACE] {"sessionId":"s_1788598896673_zm6fasdy","entry_mode":"guide","inputLength":10,"historyCount":1,"intent":"CULTURE_QA","taskType":"CULTURE_QA","behavior":"STORY_EXPLANATION","resolvedCharacter":"luoTuo","selected_agent":"camel","prompt_type":"story_answer","messages_count":3,"model":"hy3","final_response_type":"FACT"}
+[REAL_AI_TRACE] agent=camel final_mode=cultural_explanation responseType=FACT textLength=137
+[FINAL_RESPONSE_TRACE] inputLength=10 intent=CULTURE_QA behavior=STORY_EXPLANATION agent=camel prompt_type=story_answer formatter=culture_knowledge_text image_renderer=culture_knowledge_image final_type=CULTURE_OUTPUT
+{"status":"PASS","scope":"LOCAL_HOST_RUNTIME_WITH_AI_GATEWAY","tenantId":"synthetic-tenant","landmarkId":"shapotou","sessionTraceId":"host-mto5lp9d-4s60y","stages":["HOST","HOST","AI_ENTRY","TRIP","PATCH","STORY","MEMORY","STAR","RETURN_CONFIRMED"],"returnUrl":"/pages/host-demo/index?returnTrace=host-mto5lp9d-4s60y","traceChain":["host-mto5lp9d-4s60y-1","host-mto5lp9d-4s60y-2","host-mto5lp9d-4s60y-3","host-mto5lp9d-4s60y-4","host-mto5lp9d-4s60y-5","host-mto5lp9d-4s60y-6","host-mto5lp9d-4s60y-7","host-mto5lp9d-4s60y-8","host-mto5lp9d-4s60y-9"]}

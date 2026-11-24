@@ -1,0 +1,93 @@
+<view class="trip-page mountain-scene workspace-{{workspace.activePanel}} {{workspacePulse?'workspace-pulse':''}} {{scenicId==='shapotou'?'shapotou-scene':''}} {{isRtl?'rtl':''}} {{isEnglish?'en':''}}" dir="{{isRtl?'rtl':'ltr'}}" data-motion="{{motionToken}}" data-motion-mode="{{motionMode}}">
+<view wx:if="{{hostContext}}" style="order:-1"><text>{{hostContext.city}} · {{hostContext.scenicName}} · {{localeText.hostContext}}</text><button bindtap="createStory" disabled="{{loading}}">{{localeText.hostCulture}}</button><button bindtap="returnToHost">{{localeText.hostReturn}}</button><button wx:if="{{workspace.createState.saved}}" bindtap="openMemoryStar">{{localeText.hostMemory}}</button></view>
+<button class="workspace-heading" data-panel="qa" bindtap="switchWorkspacePanel" aria-expanded="{{workspace.activePanel==='qa'}}"><text class="workspace-step-number">01</text><text>{{localeText.qa}}</text><text>{{workspace.activePanel==='qa'?localeText.panelCollapse:localeText.panelExpand}}</text></button><button class="workspace-heading workspace-trip-heading" data-panel="trip" bindtap="switchWorkspacePanel" aria-expanded="{{workspace.activePanel==='trip'}}"><text class="workspace-step-number">02</text><text>{{localeText.route}}</text><text>{{workspace.activePanel==='trip'?localeText.panelCollapse:localeText.panelExpand}}</text></button>
+<view class="workspace-task" style="order:{{workspace.activePanel==='qa'?1:3}}" hidden="{{workspace.activePanel==='create'}}">  <view class="trip-hero">
+    <view wx:if="{{hostContext}}" class="trip-kicker">{{localeText.hostIntro}}: {{hostContext.city}} · {{hostContext.scenicId}} · {{localeText.hostContext}}</view>
+    <view wx:if="{{scenicId==='shapotou'}}" class="trip-kicker">{{localeText.shapotouDemo}}</view>
+    <view class="trip-kicker">{{localeText.brandKicker}}</view>
+    <view class="trip-title">{{localeText.title}}</view>
+    <view class="trip-sub">{{localeText.subtitle}}</view>
+    <view wx:if="{{isGuideMode}}" class="pet-agent-strip"><text wx:for="{{agents}}" wx:key="id">{{item.avatar}} {{item.name}} · {{item.role}}</text></view>
+    <view class="locale-row">
+      <text class="locale-chip {{locale===item.id?'active':''}}" wx:for="{{locales}}" wx:key="id" data-locale="{{item.id}}" bindtap="changeLocale">{{item.label}}</text>
+    </view>
+    <view class="composer">
+      <textarea class="{{isRtl?'rtl-text':''}}" value="{{prompt}}" maxlength="240" auto-height placeholder="{{localeText.placeholder}}" bindinput="inputPrompt"></textarea>
+      <button class="generate-btn" data-prompt="{{prompt}}" loading="{{loading}}" disabled="{{loading}}" bindtap="generate">{{localeText.generate}}</button>
+    </view>
+  </view>
+
+  <view wx:if="{{scenicId==='shapotou'}}" class="shapotou-sequence ltr-sequence" aria-label="{{localeText.shapotouTitle}}"><view class="sequence-stage stage-river"><text>01</text><view>{{localeText.stageRiver}}</view></view><view class="sequence-arrow">→</view><view class="sequence-stage stage-desert"><text>02</text><view>{{localeText.stageDesert}}</view></view><view class="sequence-arrow">→</view><view class="sequence-stage stage-sunset"><text>03</text><view>{{localeText.stageSunset}}</view></view><view class="sequence-arrow">→</view><view class="sequence-stage stage-star"><text>04</text><view>{{localeText.stageStars}}</view></view></view>
+
+  <view wx:if="{{!hasPlan && !loading}}" class="starter-section">
+    <view class="section-title">{{localeText.topics}}</view>
+    <view class="task-card" wx:for="{{quickTasks}}" wx:key="*this" data-prompt="{{item}}" bindtap="useQuick"><text>✦</text><view>{{item}}</view><text>→</text></view>
+    <view wx:if="{{isGuideMode}}" class="section-title guide-title">{{localeText.guideStart}}</view>
+    <scroll-view wx:if="{{isGuideMode}}" scroll-x class="guide-scroll">
+      <view class="guide-card" wx:for="{{guideTopics}}" wx:key="id" data-id="{{item.id}}" bindtap="guideTopic">
+        <image src="{{item.image}}" mode="aspectFill" lazy-load></image>
+        <view>{{item.displayName}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view wx:if="{{loading}}" class="state-card"><view class="pulse">✦</view><view class="state-title">{{loadingText}}</view><view class="state-copy">{{localeText.loading}}</view></view>
+  <view wx:if="{{durationOptions.length && !loading}}" class="duration-card"><view class="section-title">{{localeText.durationTitle}}</view><view class="duration-copy">{{localeText.durationCopy}}</view><view class="duration-row"><text wx:for="{{durationOptions}}" wx:key="*this" data-duration="{{item}}" bindtap="chooseDuration">{{item}}</text></view></view>
+  <view wx:if="{{baseCityOptions.length && !loading}}" class="duration-card"><view class="section-title">{{localeText.cityTitle}}</view><view class="duration-copy">{{localeText.durationCopy}}</view><view class="duration-row"><text wx:for="{{baseCityOptions}}" wx:key="*this" data-city="{{item}}" bindtap="chooseBaseCity">{{item}}</text></view></view>
+  <view wx:if="{{tripDiscoveryOptions.length && !loading}}" class="duration-card"><view class="section-title">{{localeText.stepTitle}}</view><view class="duration-row"><text wx:for="{{tripDiscoveryOptions}}" wx:key="*this" data-prompt="{{item}}" bindtap="chooseDiscovery">{{item}}</text></view></view>
+  <view wx:if="{{regionalOptions.length && !loading}}" class="duration-card"><view class="section-title">{{localeText.regionTitle}}</view><view class="duration-copy">{{localeText.verifiedOnly}}</view><view class="duration-row"><text wx:for="{{regionalOptions}}" wx:key="id" data-prompt="{{item.prompt}}" bindtap="chooseRegional">{{item.label}}</text></view></view>
+  <view wx:if="{{petAnswer && !loading}}" class="pet-answer-card"><view wx:if="{{petAnswer.source==='cloud'}}" class="source-badge">{{localeText.sourceHunyuan}}</view><view wx:elif="{{responseRouting}}" class="source-badge">{{localeText.sourceKnowledge}}</view><view wx:else class="source-badge">{{localeText.sourceKnowledge}}</view><view wx:if="{{petAnswer.characterProfile}}" class="digital-avatar-hero state-{{petAnswer.avatarState||'IDLE'}}"><image src="{{petAnswer.characterProfile.image}}" mode="aspectFit"></image><view class="avatar-identity"><view class="pet-answer-title">{{petAnswer.characterProfile.name}} · {{petAnswer.characterProfile.role}}</view><view class="avatar-status-chip">{{petAnswer.ttsMode==='AUDIO'?'🔊 '+localeText.audioMode:'◉ '+localeText.subtitleMode}}</view></view></view><view wx:if="{{petAnswer.speakText}}" class="speak-heading">{{petAnswer.characterProfile.name}}正在讲</view><view wx:if="{{petAnswer.speakText}}" class="speak-copy">{{petAnswer.speakText}}</view><button class="full-answer-toggle" bindtap="toggleFullAnswer">{{showFullAnswer?localeText.collapseAnswer:localeText.fullAnswer}}</button><view wx:if="{{showFullAnswer}}" class="pet-answer-copy">{{petAnswer.answerText || petAnswer.answer}}</view><view class="avatar-actions"><button bindtap="speakAnswer">{{petAnswer.avatarState==='SPEAKING'?'■ '+localeText.stop:petAnswer.ttsMode==='AUDIO'?'↻ '+localeText.audioMode:'▶ '+localeText.subtitleMode}}</button></view><view class="ai-label">{{localeText.aiContent}}</view><image wx:if="{{petAnswer.visual && petAnswer.visual.image}}" class="answer-visual" src="{{petAnswer.visual.image}}" mode="aspectFill"></image><view wx:if="{{petAnswer.visual}}" class="vision-source {{petAnswer.visual.source}}">{{petAnswer.visual.label}}</view><view wx:if="{{petAnswer.visual && petAnswer.visual.placeholder}}" class="vision-placeholder">{{localeText.generationUnavailable}}</view><view class="safety-card">{{localeText.latestNotice}}</view></view>
+  <view wx:if="{{error}}" class="error-card"><view class="state-title">{{error}}</view><button bindtap="retry">{{localeText.retry}}</button><button class="ghost" bindtap="goHome">{{localeText.home}}</button></view>
+
+  <view wx:if="{{workspace.activePanel==='trip' && hasPlan && !loading}}" class="result-area">
+    <view class="summary-card">
+      <view class="summary-label">{{localeText.itinerary}}</view>
+      <view class="summary-title">{{plan.summary}}</view>
+      <view class="source-badge">{{plan.aiSource==='cloud'?localeText.sourceHunyuan:plan.aiSourceLabel}}</view><button class="avatar-plan-btn" bindtap="speakPlan"><text>♪</text><text>{{localeText.listenPlan}}</text></button><view wx:if="{{planAvatar}}" class="plan-avatar-caption"><image src="{{planAvatar.characterProfile.image}}" mode="aspectFit"></image><view>{{planAvatar.speakText}}<view class="avatar-status">{{localeText.aiContent}} · {{planAvatar.ttsMode==='AUDIO'?localeText.audioMode:localeText.subtitleMode}}</view></view><button class="ghost" bindtap="stopPlan">{{localeText.stop}}</button></view>
+      <view class="constraint-row">
+        <text>{{plan.constraints.days}} {{localeText.day}}</text><text>{{plan.cityLabel}}</text><text>{{plan.constraints.pace==='relaxed'?localeText.relaxedPace:localeText.balancedPace}}</text><text wx:if="{{plan.constraints.budget}}">{{localeText.budget}} {{plan.constraints.budget}}</text>
+      </view>
+    </view>
+
+    <view class="route-guide"><view class="route-guide-actor">🦊</view><view class="route-guide-copy"><view class="route-guide-kicker">{{localeText.routeGuideKicker}}</view><view class="route-guide-title">{{localeText.routeTitle}}</view><view class="route-guide-state">{{localeText.routeCopy}}</view></view><view class="route-rail"><view class="route-rail-dot active"></view><view class="route-rail-line"></view><view class="route-rail-dot"></view><view class="route-rail-line"></view><view class="route-rail-dot"></view></view></view>
+
+    <view class="adjust-panel">
+      <view class="adjust-label">{{localeText.modify}}</view>
+      <scroll-view scroll-x><view class="adjust-row"><text wx:for="{{adjustments}}" wx:key="key" data-instruction="{{item.key}}" bindtap="adjust">{{item.label}}</text></view></scroll-view>
+    </view>
+
+    <view class="day-block" wx:for="{{plan.days}}" wx:key="date" wx:for-item="day">
+      <view class="day-heading"><view>{{day.date}}</view><text>{{day.items.length}} {{localeText.scheduledItems}}</text></view>
+      <view class="timeline-item" wx:for="{{day.items}}" wx:key="time" wx:for-item="planItem">
+        <view class="timeline-time">{{planItem.time}}</view>
+        <view class="timeline-dot {{planItem.type}}"></view>
+        <view class="itinerary-card" data-id="{{planItem.id}}" bindtap="explain">
+          <image wx:if="{{planItem.image}}" src="{{planItem.image}}" mode="aspectFit" lazy-load></image>
+          <view wx:elif="{{planItem.visual && planItem.visual.placeholder}}" class="vision-placeholder">{{localeText.imageUnavailable}}</view>
+          <view class="item-main">
+            <view class="item-type">{{planItem.type==='food'?localeText.food:planItem.type==='rest'?localeText.rest:planItem.type==='transit'?localeText.transit:localeText.destination}}</view>
+            <view class="item-name">{{planItem.name}}</view>
+            <view wx:if="{{planItem.visual}}" class="vision-source {{planItem.visual.source}}">{{planItem.visual.label}} · {{planItem.visual.bestTime}}</view>
+            <view class="item-reason">{{planItem.reason}}</view>
+            <view class="item-meta"><text>{{planItem.duration}}</text><view wx:if="{{planItem.agentId==='rock-goat'}}" class="persona-meta"><text>🐑</text><text>{{localeText.argaliGuide}}</text></view><view wx:elif="{{planItem.agentId==='sand-fox'}}" class="persona-meta"><text>🦊</text><text>{{localeText.foxGuide}}</text></view><view wx:else class="persona-meta"><text>🐫</text><text>{{localeText.camelGuide}}</text></view></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="safety-card"><view class="safety-title">{{localeText.beforeGo}}</view><view wx:for="{{plan.tips}}" wx:key="*this">{{item}}</view></view>
+    <view wx:if="{{scenicId==='shapotou'}}" class="shapotou-flow-card"><view class="summary-label">{{localeText.shapotouTitle}}</view><view class="item-meta">{{localeText.stageRiver}} → {{localeText.stageDesert}} → {{localeText.stageSunset}} → {{localeText.stageStars}}</view><button class="ghost" bindtap="createStory">{{localeText.listenStory}}</button><view wx:if="{{shapotouStory}}" class="story-preview"><view class="item-name">{{shapotouStory.title}}</view><view class="item-reason">{{shapotouStory.fact}} {{shapotouStory.interpretation}}</view><button class="memory-btn" bindtap="createMemory">{{localeText.saveMemory}}</button></view></view>
+    <view wx:if="{{addedItems.length}}" class="summary-card"><view class="summary-label">{{localeText.added}}</view><view class="item-meta" wx:for="{{addedItems}}" wx:key="id"><text>{{item.type==='food'?localeText.food:localeText.destination}}</text><text>{{item.name}}</text></view></view>
+    <button class="memory-btn" bindtap="createMemory">{{localeText.createMemory}}</button>
+    <button class="share-btn" open-type="share">{{localeText.share}}</button>
+  </view>
+</view>
+<button class="workspace-heading workspace-create-heading" data-panel="create" bindtap="switchWorkspacePanel" aria-expanded="{{workspace.activePanel==='create'}}"><text class="workspace-step-number">03</text><text>{{localeText.createPanel}}</text><text>{{workspace.activePanel==='create'?localeText.panelCollapse:localeText.panelExpand}}</text></button>
+<view hidden="{{workspace.activePanel!=='create'}}" class="workspace-creation">
+ <view class="trip-title">{{localeText.creationTitle}}</view><view class="trip-sub">{{localeText.creationCopy}}</view>
+ <view class="memory-source-row"><button data-source="trip" bindtap="selectMemorySource">{{workspace.createState.source!=='qa'?'✓ ':''}}{{localeText.currentRoute}}</button><button data-source="qa" bindtap="selectMemorySource">{{workspace.createState.source==='qa'?'✓ ':''}}{{localeText.qaContent}}</button></view>
+ <button class="generate-btn" bindtap="composeMemory">{{localeText.textCard}}</button>
+ <view wx:if="{{workspace.createState.card}}" class="summary-card"><view class="pet-answer-copy">{{workspace.createState.card.copy}}</view><view class="ai-label">{{localeText.aiMemory}}</view><button bindtap="saveWorkspaceMemory" disabled="{{workspace.createState.saved}}">{{workspace.createState.saved?localeText.savedLocal:localeText.saveLocal}}</button></view>
+</view>
+  <view wx:if="{{voiceSheetVisible}}" class="voice-sheet-mask" catchtap="closeVoiceSheet"><view class="voice-sheet" catchtap="noop"><view class="voice-sheet-orb">{{petAnswer.characterProfile.animal}}</view><view class="voice-sheet-title">{{voiceSheetTitle}}</view><view class="voice-sheet-body">{{voiceSheetBody}}</view><button class="btn btn-full" bindtap="continueVoiceChat">{{localeText.continueChat}}</button><button class="voice-sheet-secondary" bindtap="closeVoiceSheet">{{localeText.viewSubtitles}}</button><button class="voice-sheet-quiet" bindtap="closeVoiceSheet">{{localeText.gotIt}}</button></view></view>
+</view>

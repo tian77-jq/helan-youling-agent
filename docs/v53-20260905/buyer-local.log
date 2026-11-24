@@ -1,0 +1,91 @@
+[SESSION] old=none new=s_1788598282350_syoi1aql
+[CONVERSATION_GATEWAY] {"inputLength":15,"source":"unknown","entryMode":"guide","entities":{"destinations":[],"cities":[],"days":null,"originCity":null}}
+[SESSION] old=s_1788598282350_syoi1aql new=s_1788598282350_syoi1aql
+[TOURIST_ENTITY_TRACE] {"inputLength":15,"destinations":["shapotou"],"cities":["中卫"],"originCity":null,"companions":["children"],"budget":null,"days":null,"constraints":[],"preferences":[]}
+[CONTEXT_PRIORITY_TRACE] inputLength=15 history_count=0 current_intent=GENERAL_DISCOVERY history_intent=NONE
+[AI_PIPELINE_TRACE] {"sessionId":"s_1788598282350_syoi1aql","entry_mode":"guide","inputLength":15,"historyCount":0,"intent":"GENERAL_DISCOVERY","taskType":"GENERAL_DISCOVERY","behavior":"DIRECT_ANSWER","resolvedCharacter":"shaHu","selected_agent":"sand-fox","prompt_type":"open_answer","messages_count":3,"model":"hy3","final_response_type":"pending"}
+[REAL_AI_TRACE] inputLength=15 page=pages/trip/index.js sessionId=s_1788598282350_syoi1aql historyCount=0 intent=GENERAL_DISCOVERY behavior=DIRECT_ANSWER
+[AI][RESPONSE_ROUTER] {
+  intent: 'GENERAL_DISCOVERY',
+  response_behavior: 'DIRECT_ANSWER',
+  sessionId: 's_1788598282350_syoi1aql'
+}
+[PET][QUESTION] { inputLength: 15 }
+[PET][ROUTER] UNKNOWN
+[REGIONAL_SCOPE_GATE] {
+  queryScope: {
+    region: 'NINGXIA',
+    strictRegion: true,
+    topic: 'GENERAL',
+    scope: 'NINGXIA_ADMINISTRATIVE_REGION'
+  },
+  retrievedCount: 22,
+  topicMatchedCount: 22,
+  regionMatchedCount: 21,
+  entityValidatedCount: 21,
+  selectedCount: 21,
+  rejectedCrossRegionCount: 1,
+  items: undefined
+}
+[AI_PIPELINE] inputLength=15 intent=GENERAL_DISCOVERY behavior=DIRECT_ANSWER selected_agent=sand-fox resolvedCharacter=shaHu prompt_type=direct_answer final_mode=text_first
+[REGIONAL_SCOPE_RUNTIME] {
+  queryScope: 'NINGXIA_ADMINISTRATIVE_REGION',
+  retrievedCount: 39,
+  topicMatchedCount: 39,
+  regionMatchedCount: 36,
+  entityValidatedCount: 36,
+  selectedKnowledgeCount: 1,
+  rejectedCrossRegionCount: 3
+}
+[PET][KNOWLEDGE] grounded { count: 1 }
+[CLOUD_AI_PREFLIGHT] {
+  ready: true,
+  provider: 'cloudbase',
+  model: 'hy3',
+  env: 'cloudbase-d6g1u2dzk45c62fc1'
+}
+[PET][CLOUD] request started { agent: 'sand-fox', model: 'hy3' }
+[REAL_AI_TRACE] agent=sand-fox prompt=direct_answer model=hy3 response=pending
+[CONTEXT_PRIORITY_TRACE] inputLength=15 history_count=0 current_intent=GENERAL_DISCOVERY history_intent=NONE
+[FINAL_AI_CHAIN] { promptType: 'direct_answer', model: 'hy3', messages: 3 }
+[REAL_CLOUD_MESSAGES_META] promptType=direct_answer messageCount=3 questionLength=15 knowledgeLength=580
+[TEXT_MODEL_RUNTIME] {
+  provider: 'cloudbase',
+  alias: 'hy3',
+  realModelId: null,
+  endpoint: 'CloudBase AI.createModel',
+  requestId: '',
+  elapsedMs: 0,
+  status: 'success'
+}
+[PET][CLOUD] response received { agent: 'sand-fox' }
+[PET][CLOUD] schema valid { agent: 'sand-fox' }
+[REAL_AI_TRACE] agent=sand-fox prompt=direct_answer model=hy3 responseType=FACT knowledgeCount=1 textLength=62
+[AI_EXPERIENCE_TRACE] {
+  traceId: 'trace-1788598282356-azvpxw',
+  timestamp: '2026-09-05T08:51:22.357Z',
+  entrySource: 'trip-page',
+  hostPlatform: 'none',
+  tenantId: null,
+  scenicId: null,
+  landmarkId: null,
+  intent: 'GENERAL_DISCOVERY',
+  resolvedCharacter: null,
+  activeTheme: null,
+  knowledgeRetrievedCount: 1,
+  knowledgeSelectedCount: 1,
+  knowledgeIds: [ 'BUYER_TEST_SHAPOTOU_001' ],
+  provider: 'cloudbase',
+  modelAlias: 'hy3',
+  latencyMs: 1,
+  fallbackReason: null,
+  errorCode: null,
+  resultType: 'FACT'
+}
+[FINAL_RESPONSE_QUALITY_GATE] behavior=DIRECT_ANSWER result=CLOUD_POLISHED reason=OK
+[IMAGE_RELEVANCE_GATE] result=NONE action=TEXT_UNCHANGED
+[SESSION] old=s_1788598282350_syoi1aql new=s_1788598282350_syoi1aql
+[AI_PIPELINE_TRACE] {"sessionId":"s_1788598282350_syoi1aql","entry_mode":"guide","inputLength":15,"historyCount":0,"intent":"GENERAL_DISCOVERY","taskType":"GENERAL_DISCOVERY","behavior":"DIRECT_ANSWER","resolvedCharacter":"shaHu","selected_agent":"sand-fox","prompt_type":"open_answer","messages_count":3,"model":"hy3","final_response_type":"FACT"}
+[REAL_AI_TRACE] agent=sand-fox final_mode=text_exploration responseType=FACT textLength=62
+[FINAL_RESPONSE_TRACE] inputLength=15 intent=GENERAL_DISCOVERY behavior=DIRECT_ANSWER agent=sand-fox prompt_type=open_answer formatter=discovery_text image_renderer=none final_type=GENERAL_OUTPUT
+{"status":"PASS","scope":"LOCAL_PIPELINE_PROVIDER_STUB_ONLY","selected":["BUYER_TEST_SHAPOTOU_001"],"consumed":["BUYER_TEST_SHAPOTOU_001"],"priority":["VERIFIED_REALTIME","BUYER_OFFICIAL_DATA","PROJECT_APPROVED","PUBLIC_GROUNDED","GENERAL_MODEL"],"promptInjection":"REJECTED","tenantIsolation":true}

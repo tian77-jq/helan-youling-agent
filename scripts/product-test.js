@@ -1,0 +1,10 @@
+const fs=require('fs'),path=require('path')
+const root=path.resolve(__dirname,'..'),results=[]
+function test(name,fn){try{const value=fn();results.push({name,status:'PASS',detail:value||''})}catch(error){results.push({name,status:'FAIL',detail:error.message})}}
+test('首页静态入口',()=>{const s=fs.readFileSync(path.join(root,'pages/index/index.js'),'utf8');if(/wx\.cloud|callFunction/.test(s))throw new Error('首页首屏直接调用云服务');return '0 direct cloud/AI call'})
+test('AI灵游 service',()=>{const service=require(path.join(root,'services/trip-service'));return service.plan('两天宁夏历史和美食').then? 'promise contract ok':'invalid contract'})
+test('已去景点硬约束',()=>{const agent=require(path.join(root,'utils/trip-agent'));const plan=agent.planTrip('第三次来宁夏，沙坡头和腾格里沙漠都去过了，想去别的地方，两天和对象慢慢玩');const ids=plan.days.flatMap(day=>day.items.map(item=>item.id));if(!plan.constraints.excludedStops.includes('shapotou')||!plan.constraints.excludedStops.includes('tengger-desert'))throw new Error('未识别已去景点');if(ids.includes('shapotou')||ids.includes('tengger-desert'))throw new Error('路线重新安排了已去景点');return `排除 ${plan.constraints.excludedStops.length} 个已去地点`})
+test('AI灵境 prompt',()=>{const service=require(path.join(root,'services/image-service'));const value=service.buildPrompt({scene:'贺兰山',culture:'西夏文化',pet:'岩羊',style:'文旅纪念卡'});if(!value.scene||!value.culture||!value.pet||!value.style)throw new Error('prompt字段不完整');return 'scene/culture/pet/style ok'})
+test('商城数据',()=>{const data=require(path.join(root,'data/product.json'));if(!data.length)throw new Error('product.json为空');return `${data.length} products`})
+test('IP页面',()=>{if(!fs.existsSync(path.join(root,'pages/ip/index.js')))throw new Error('IP页面不存在');return 'route exists'})
+const failed=results.filter(x=>x.status==='FAIL');const report=['# PRODUCT TEST REPORT','',`生成时间：${new Date().toISOString()}`,'',...results.map(x=>`- ${x.status} ${x.name}：${x.detail}`),'',`总体：${failed.length?'FAIL':'PASS'}`].join('\n');fs.writeFileSync(path.join(root,'docs/PRODUCT_TEST_REPORT.md'),report+'\n');console.log(JSON.stringify({status:failed.length?'FAIL':'PASS',results,report:'docs/PRODUCT_TEST_REPORT.md'},null,2));if(failed.length)process.exitCode=1

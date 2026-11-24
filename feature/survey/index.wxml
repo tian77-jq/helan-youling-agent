@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="title">留下一份真实反馈</view>
+  <view class="subtitle">问卷数据仅用于校赛项目调研与产品迭代，请按你的真实感受填写。</view>
+  <block wx:for="{{questions}}" wx:key="key">
+    <view class="card section">
+      <view class="label">{{item.label}}</view>
+      <view class="pill-row">
+        <text class="pill {{form[item.key]===option?'active':''}}" wx:for="{{item.options}}" wx:for-item="option" wx:key="*this" data-key="{{item.key}}" data-value="{{option}}" bindtap="choose">{{option}}</text>
+      </view>
+    </view>
+  </block>
+  <view class="card section">
+    <view class="label">补充建议</view>
+    <textarea class="input" placeholder="你希望贺兰有灵增加什么内容？" bindinput="inputAdvice"></textarea>
+  </view>
+  <button class="btn btn-full" bindtap="submit">提交问卷</button>
+</view>

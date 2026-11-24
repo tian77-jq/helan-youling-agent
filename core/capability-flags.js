@@ -1,0 +1,10 @@
+module.exports={
+  ENABLE_TRIP:true,
+  ENABLE_QA:true,
+  ENABLE_STORY:true,
+  ENABLE_CHARACTER:true,
+  ENABLE_MEMORY:true,
+  ENABLE_CREATE:true,
+  ENABLE_SHARE:true,
+  ENABLE_REALTIME:false
+}

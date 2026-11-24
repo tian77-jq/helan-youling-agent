@@ -1,0 +1,12 @@
+const fs=require('fs'),automator=require('C:/Users/32862/AppData/Local/npm-cache/_npx/cf54c79a0524a233/node_modules/miniprogram-automator')
+;(async()=>{const mini=await automator.connect({wsEndpoint:'ws://127.0.0.1:9420'});const timer=setTimeout(()=>mini.disconnect(),30000);try{
+ await mini.reLaunch('/pages/trip/index?mode=resume&panel=create')
+ await mini.evaluate(()=>{setTimeout(()=>getCurrentPages().slice(-1)[0].composeMemory(),0);return true})
+ await new Promise(resolve=>setTimeout(resolve,1200))
+ const result=await mini.evaluate(()=>{const p=getCurrentPages().slice(-1)[0],card=p.data.workspace.createState.card;return {hasCard:!!card,copyLength:card?card.copy.length:0,source:p.data.plan&&p.data.plan.aiSource}})
+ await mini.screenshot({path:'D:/贺兰有灵小程序/docs/audit-20260905/create-final.png'})
+ await mini.evaluate(()=>{setTimeout(()=>getCurrentPages().slice(-1)[0].saveWorkspaceMemory(),0);return true})
+ await new Promise(resolve=>setTimeout(resolve,300))
+ const saved=await mini.evaluate(()=>({saved:!!getCurrentPages().slice(-1)[0].data.workspace.createState.saved}))
+ fs.writeFileSync('docs/audit-20260905/memory-proof.json',JSON.stringify({at:new Date().toISOString(),sourceHash:require('./audit-fingerprint')(),scope:'RESUMED_REAL_TRIP_LOCAL_COMPOSITION',...result,...saved},null,2));console.log(JSON.stringify({...result,...saved}))
+ }finally{clearTimeout(timer);mini.disconnect()}})().catch(error=>{console.error(String(error));process.exitCode=1})

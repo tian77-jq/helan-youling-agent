@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"ScenicRightsPolicy",
+  "type":"object",
+  "required":["scenicId","brandAuthorization","mediaAuthorization","factSources","mapLicense","dataLicense","buyerProvidedAssets","mode"],
+  "properties":{
+    "scenicId":{"type":"string"},
+    "brandAuthorization":{"type":"string"},
+    "mediaAuthorization":{"type":"string"},
+    "factSources":{"type":"array","items":{"type":"string"}},
+    "mapLicense":{"type":"string"},
+    "dataLicense":{"type":"string"},
+    "buyerProvidedAssets":{"type":"array","items":{"type":"string"}},
+    "mode":{"enum":["INDEPENDENT_POC_MODE","BUYER_AUTHORIZED_MODE"]}
+  }
+}

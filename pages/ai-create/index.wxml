@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="title">贺兰灵境·AI文旅共创</view>
+  <view class="sub">景区 × 文化 × 萌宠，生成你的宁夏数字纪念卡</view>
+  <view class="choices"><button data-field="scene" data-value="贺兰山" bindtap="choose">贺兰山</button><button data-field="scene" data-value="沙坡头" bindtap="choose">沙坡头</button><button data-field="culture" data-value="西夏文化" bindtap="choose">西夏文化</button><button data-field="culture" data-value="黄河文化" bindtap="choose">黄河文化</button><button data-field="culture" data-value="非遗文化" bindtap="choose">非遗文化</button><button data-field="pet" data-value="岩羊" bindtap="choose">岩羊</button><button data-field="pet" data-value="骆驼" bindtap="choose">骆驼</button><button data-field="pet" data-value="沙狐" bindtap="choose">沙狐</button><button data-field="style" data-value="文旅纪念卡" bindtap="choose">文旅纪念卡</button><button data-field="style" data-value="旅行海报" bindtap="choose">旅行海报</button><button data-field="style" data-value="3D萌宠" bindtap="choose">3D萌宠</button></view>
+  <textarea class="input" maxlength="500" value="{{prompt}}" placeholder="选择按钮后会自动写入提示词，你可以继续修改" bindinput="input"></textarea>
+  <view class="ai-notice">AI生成/合成内容 · 请勿输入个人敏感信息或他人肖像</view>
+  <button class="primary" loading="{{loading}}" disabled="{{loading}}" bindtap="generate">生成我的宁夏纪念作品</button>
+  <view wx:if="{{error}}" class="error">{{error}}</view>
+  <view wx:if="{{imageUrl}}" class="art-card"><view class="ai-label">AI生成/合成内容 · 原生文字排版</view><view class="art-composition" dir="{{composition.isRtl?'rtl':'ltr'}}"><image class="art-image" src="{{imageUrl}}" mode="widthFix"></image><view class="composition-overlay"><view class="composition-title">{{composition.title}}</view><view class="composition-meta">{{composition.location}} · {{composition.character}}</view><view wx:if="{{composition.quote}}" class="composition-quote">{{composition.quote}}</view><view class="composition-date">{{composition.dateLabel}} · {{composition.date}}</view></view></view><button size="mini" bindtap="saveWork">保存作品记录</button><view class="source">来源：{{result.source}} · {{result.mode}}</view></view>
+  <view wx:if="{{promptObject}}" class="prompt-card"><view>场景：{{promptObject.scene}}</view><view>文化：{{promptObject.culture}}</view><view>萌宠：{{promptObject.pet}}</view><view>风格：{{promptObject.style}}</view><view class="hint">{{result.message}}</view></view>
+</view>

@@ -1,0 +1,7 @@
+[
+  {"id":"heritage-helan-ecology","name":"贺兰山生态","description":"贺兰山山地生态与岩羊意象。","source":"项目宁夏生态资料","authority":"待专家/官方复核","category":"scenic","tags":["生态","岩羊"],"relatedIP":["rock-goat"]},
+  {"id":"heritage-xixia","name":"西夏文化","description":"西夏陵、岩画与地方历史记忆。","source":"项目宁夏文化资料","authority":"待文化专家复核","category":"history","tags":["西夏陵","岩画"],"relatedIP":["camel","rock-goat"]},
+  {"id":"heritage-yellow-river","name":"黄河文化","description":"黄河峡谷、灌溉文明和塞上江南。","source":"项目宁夏文化资料","authority":"待官方资料复核","category":"culture","tags":["黄河","水利"],"relatedIP":["camel"]},
+  {"id":"heritage-food","name":"宁夏美食","description":"手抓羊肉、八宝茶和地方面食。","source":"项目宁夏美食资料","authority":"待餐饮专家复核","category":"food","tags":["羊肉","茶饮","面食"],"relatedIP":["camel","sand-fox"]},
+  {"id":"heritage-intangible","name":"宁夏非遗","description":"剪纸、贺兰砚、皮影等传统技艺。","source":"项目宁夏非遗资料","authority":"待非遗专家复核","category":"culture","tags":["非遗","传统技艺"],"relatedIP":["sand-fox"]}
+]

@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/ai-trip/index",
+    "pages/ai-create/index",
+    "pages/trip/index",
+    "pages/ip/index",
+    "pages/recommend/index",
+    "pages/language/index",
+    "pages/shop/index",
+    "pages/admin/index",
+    "pages/host-demo/index",
+    "pages/host-return/index"
+  ],
+  "subPackages": [
+    {"root":"feature","pages":["ip/detail","recommend/result","shop/detail","photo/index","memory/index","survey/index","attraction/detail","food/detail","cultural/index","create/index","create/config","create/result","digital-avatar/index"]}
+  ],
+  "window": {
+    "navigationBarTitleText": "贺兰有灵",
+    "navigationBarBackgroundColor": "#FFF8EE",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F8F1E7",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#8E8276",
+    "selectedColor": "#8B5A2B",
+    "backgroundColor": "#FFF8EE",
+    "borderStyle": "white",
+    "list": [
+      {"pagePath":"pages/index/index","text":"山·首页"},
+      {"pagePath":"pages/ip/index","text":"河·发现"},
+      {"pagePath":"pages/shop/index","text":"沙·文创"},
+      {"pagePath":"pages/admin/index","text":"星·我的"}
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

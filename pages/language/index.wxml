@@ -1,0 +1,7 @@
+<view class="page language-page {{isRtl?'rtl':''}} {{isEnglish?'en':''}}" dir="{{isRtl?'rtl':'ltr'}}">
+  <view class="title">{{title}}</view>
+  <view class="subtitle">{{languageLabel}}</view>
+  <view class="card section language-options">
+    <button wx:for="{{languageOptions}}" wx:key="id" class="btn btn-full language-option {{locale===item.id?'selected':''}}" data-locale="{{item.id}}" bindtap="chooseLanguage">{{item.label}}<text wx:if="{{locale===item.id}}"> · ✓</text></button>
+  </view>
+</view>

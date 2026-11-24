@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://helan-y有ling.local/contracts/scenic-adapter.schema.json",
+  "title": "ScenicAdapterContract",
+  "type": "object",
+  "required": ["scenicId", "getProfile", "getExperienceCatalog", "getStoryCatalog", "getTripPolicy", "getCharacterPolicy", "getTheme", "getKnowledgeScope", "getMemoryTemplates", "getShareTemplates"],
+  "properties": {
+    "scenicId": {"type":"string","minLength":1},
+    "getProfile": {"type":"string"},
+    "getExperienceCatalog": {"type":"string"},
+    "getStoryCatalog": {"type":"string"},
+    "getTripPolicy": {"type":"string"},
+    "getCharacterPolicy": {"type":"string"},
+    "getTheme": {"type":"string"},
+    "getKnowledgeScope": {"type":"string"},
+    "getMemoryTemplates": {"type":"string"},
+    "getShareTemplates": {"type":"string"}
+  }
+}

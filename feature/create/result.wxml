@@ -1,0 +1,9 @@
+<view class="create-result" wx:if="{{result}}">
+  <view class="result-head"><view class="eyebrow">MY NINGXIA CREATION</view><view class="result-title">作品完成</view><view class="result-sub">{{scene.title}} · {{pet.name}}陪你创作</view></view>
+  <view class="art-card"><view class="art-image-wrap" dir="{{composition.isRtl?'rtl':'ltr'}}"><image class="art-image" src="{{result.imageUrl}}" mode="aspectFill" bindtap="preview"></image><view class="ai-content-mark">{{composition.generated}}</view><view class="composition-overlay"><view class="composition-title">{{composition.title}}</view><view class="composition-meta">{{composition.location}} · {{composition.character}}</view><view wx:if="{{composition.quote}}" class="composition-quote">{{composition.quoteLabel}} · {{composition.quote}}</view><view class="composition-date">{{composition.dateLabel}} · {{composition.date}}</view></view></view><view class="art-label">{{output.name}} · {{style.name}}</view></view>
+  <view class="culture-card"><view class="culture-kicker">CULTURE NOTE</view><view class="culture-title">宁夏文化纪念</view><view class="culture-copy">{{result.cultureNote}}</view><view class="pet-credit">{{pet.icon}} 作品由{{pet.name}} · {{pet.role}}陪你完成</view></view>
+  <view class="mock-note">腾讯云开发混元生图 · {{result.model}}</view>
+  <view class="action-grid"><button bindtap="preview">预览大图</button><button bindtap="save" loading="{{saving}}">保存相册</button><button bindtap="share">分享作品</button><button bindtap="again">再次生成</button></view>
+  <button class="secondary-btn" bindtap="backConfig">换一个主题继续创作</button>
+  <canvas class="mark-canvas" canvas-id="aiMarkedCanvas" style="width:{{markCanvasWidth}}px;height:{{markCanvasHeight}}px"></canvas>
+</view>

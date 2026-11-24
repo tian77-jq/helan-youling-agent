@@ -1,0 +1,26 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto')
+const automator=require('C:/Users/32862/AppData/Local/npm-cache/_npx/cf54c79a0524a233/node_modules/miniprogram-automator')
+const dir=path.resolve('docs/hero-20260905'),sleep=ms=>new Promise(r=>setTimeout(r,ms))
+const watchdog=setTimeout(()=>{console.error('HERO_PROOF_TIMEOUT');process.exit(1)},55000)
+;(async()=>{
+ console.log('Connecting simulator')
+ const mini=await automator.connect({wsEndpoint:'ws://127.0.0.1:9420'})
+ console.log('Connected')
+ const result={status:'SIMULATOR_ONLY',at:new Date().toISOString(),sourceHash:require('./audit-fingerprint')(),heroHash:crypto.createHash('sha256').update(fs.readFileSync('assets/thumbs/banners/ningxia-hero-v1.jpg')).digest('hex'),errors:[]}
+ mini.on('exception',e=>result.errors.push(String(e).slice(0,200)))
+ const state=()=>mini.evaluate(()=>{const p=getCurrentPages().slice(-1)[0];return {path:p.route,imageLoaded:!!p.data.heroImageLoaded,imageFailed:!!p.data.heroImageFailed,entering:!!p.data.heroEntering,onboardingVisible:!!p.data.onboardingVisible,entries:(p.data.entries||[]).length}})
+ console.log('Launching home');await mini.reLaunch('/pages/index/index');console.log('Home launched');await sleep(2100)
+ result.first=await state();await mini.screenshot({path:path.join(dir,'home-after.png')})
+ await mini.switchTab('/pages/ip/index');await sleep(300);await mini.switchTab('/pages/index/index');await sleep(180)
+ result.reentry=await state();await mini.screenshot({path:path.join(dir,'home-reentry.png')});await sleep(1800);result.settled=await state()
+ await mini.evaluate(()=>{getCurrentPages().slice(-1)[0].onHeroError();return true});await sleep(200)
+ result.errorFallback=await state()
+ await mini.evaluate(()=>{const p=getCurrentPages().slice(-1)[0];p.onHeroLoad();p.setData({motionMode:'REDUCED'});p.replayHero();return true});await sleep(180)
+ result.reduced=await state()
+ await mini.evaluate(()=>{const p=getCurrentPages().slice(-1)[0];p.setData({motionMode:'FULL'});return true})
+ await mini.evaluate(()=>{setTimeout(()=>getCurrentPages().slice(-1)[0].newTrip(),0);return true});await sleep(700)
+ result.tripNavigation=await state()
+ await mini.reLaunch('/pages/index/index');await sleep(2100);await mini.screenshot({path:path.join(dir,'home-after.png')})
+ result.pass=result.first.imageLoaded&&!result.first.imageFailed&&result.first.entries===3&&result.reentry.entering&&!result.settled.entering&&result.errorFallback.imageFailed&&!result.reduced.entering&&result.tripNavigation.path==='pages/trip/index'&&result.errors.length===0
+ fs.writeFileSync(path.join(dir,'simulator-proof.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));await mini.disconnect();clearTimeout(watchdog);if(!result.pass)process.exitCode=1
+})().catch(e=>{clearTimeout(watchdog);console.error(e);process.exitCode=1})

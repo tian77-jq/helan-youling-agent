@@ -1,0 +1,11 @@
+<view class="avatar-page">
+  <view class="avatar-card state-{{state}}">
+    <image class="avatar-image" src="{{payload.characterProfile.image}}" mode="aspectFit"></image>
+    <view class="avatar-name">{{payload.characterProfile.name}} · {{payload.characterProfile.role}}</view>
+    <view class="avatar-state">{{state==='SPEAKING'?'正在讲解':state==='HAPPY'?'讲解完成':'AI数字人格 · 字幕模式'}}</view>
+  </view>
+  <view class="caption-card"><view class="caption-label">口播稿</view><view>{{payload.speakText}}</view></view>
+  <button bindtap="speak" disabled="{{playing}}">{{payload.ttsMode==='AUDIO'?'🔊 再听一次':'▶ 查看字幕讲解'}}</button>
+  <button class="ghost" bindtap="stop">停止</button>
+  <view class="ai-label">AI生成/合成内容 · 原创IP数字讲解员</view>
+</view>

@@ -1,0 +1,2 @@
+// Compatibility route: one planner owns requests and state.
+Page({data:{error:''},onLoad(options){const keys=['mode','panel','locale','source','scenic'];const query=keys.filter(key=>options&&options[key]).map(key=>key+'='+encodeURIComponent(options[key]));if(options&&options.prompt)query.push('prompt='+encodeURIComponent(options.prompt));wx.redirectTo({url:'/pages/trip/index'+(query.length?'?'+query.join('&'):''),fail:()=>this.setData({error:'暂时无法打开工作台，请返回首页重试。'})})},goHome(){wx.switchTab({url:'/pages/index/index'})}})

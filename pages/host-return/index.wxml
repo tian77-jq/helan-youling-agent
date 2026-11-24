@@ -1,0 +1,1 @@
+<view class="host-return-page"><view class="host-return-kicker">HOST RETURN · 宿主接入回传</view><view class="host-return-title">体验已完成，回到景区服务</view><view class="host-return-copy">{{hostContext?hostContext.city+' · '+hostContext.scenicId:'当前没有可回传的宿主上下文'}}</view><button bindtap="backToHost">返回宿主页面</button><button class="ghost" bindtap="goTrip">继续问灵灵</button></view>

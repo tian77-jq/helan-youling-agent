@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.1",
+  "status": "VERIFIED_DIRECT_DEPENDENCIES",
+  "policy": "NO_LICENSE_ASSUMPTION",
+  "entries": [
+    {"name":"@cloudbase/node-sdk","version":"3.18.3","license":"MIT","source":"installed package metadata and TencentCloudBase package metadata"},
+    {"name":"@cloudbase/ai","version":"2.30.0","license":"Apache-2.0","source":"installed package metadata"},
+    {"name":"tencentcloud-sdk-nodejs-tts","version":"4.1.237","license":"Apache-2.0","source":"installed package metadata and TencentCloud SDK source license"},
+    {"name":"wx-server-sdk","version":"3.0.1","license":"MIT","source":"wechat-miniprogram/wx-server-sdk package metadata"}
+  ],
+  "scanNote": "Direct production dependencies declared by all cloud-function package manifests were verified on 2026-09-02. Transitive dependency and vulnerability review remains a deployment-time gate after deterministic installs."
+}

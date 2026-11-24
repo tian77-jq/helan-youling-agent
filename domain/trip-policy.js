@@ -1,0 +1,3 @@
+function validateRequest(request){const value=request||{};return {days:Number.isInteger(value.days)&&value.days>0?value.days:null,baseCity:value.baseCity||null,preferences:Array.isArray(value.preferences)?value.preferences:[],needsClarification:!(Number.isInteger(value.days)&&value.days>0)}}
+function selectRhythm(request){const value=validateRequest(request);if(value.needsClarification)return {status:'needs-clarification',reason:'duration-required'};return {status:'ready',days:value.days,rhythm:value.preferences.includes('relaxed')?'slow':'balanced'}}
+module.exports={validateRequest,selectRhythm}

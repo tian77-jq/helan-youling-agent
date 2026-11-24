@@ -1,0 +1,18 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'..');
+const exists=p=>fs.existsSync(path.join(root,p));
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const errors=[];const warnings=[];
+const config=read('config/cloud.js');
+if(!/envId:\s*['"][^'"]+/.test(config)) errors.push('缺少云环境 ID');
+if(!exists('providers/hunyuan-image-provider.js')) errors.push('缺少生图 Provider');
+if(!exists('utils/cloud-ai.js')) errors.push('缺少文字 AI 服务层');
+if(!/callFunction/.test(read('providers/hunyuan-provider.js'))) errors.push('生图 Provider 没有云函数调用分支');
+if(!/LOCAL_DEMO_MODE/.test(config)) warnings.push('未声明 LOCAL_DEMO_MODE');
+if(!/HUNYUAN_MODE/.test(read('providers/hunyuan-provider.js'))) errors.push('缺少 HUNYUAN_MODE 降级分支');
+const report=['# HUNYUAN READY REPORT','',`生成时间：${new Date().toISOString()}`,`状态：${errors.length?'FAIL':'PASS'}`,'',`- 生图 Provider：${exists('providers/hunyuan-image-provider.js')?'已具备':'缺失'}`,`- 文字 AI 服务层：${exists('utils/cloud-ai.js')?'已具备':'缺失'}`,`- 配置生图模式：${/imageMode:\s*['"]HUNYUAN_MODE/.test(config)?'HUNYUAN_MODE':'未启用'}`,'- 本地体验模式：保留为失败降级，不作为生产成功结果','','## 错误',...(errors.length?errors.map(x=>'- '+x):['- 无']),'','## 警告',...(warnings.length?warnings.map(x=>'- '+x):['- 无'])].join('\n')+'\n';
+fs.mkdirSync(path.join(root,'docs'),{recursive:true});
+fs.writeFileSync(path.join(root,'docs','HUNYUAN_READY_REPORT.md'),report);
+console.log(JSON.stringify({status:errors.length?'FAIL':'PASS',errors,warnings,report:'docs/HUNYUAN_READY_REPORT.md'},null,2));
+if(errors.length) process.exitCode=1;

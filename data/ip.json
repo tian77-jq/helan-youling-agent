@@ -1,0 +1,5 @@
+[
+  {"id":"rock-goat","name":"岩羊","personality":"坚韧、温暖、可靠","story":"它站在贺兰山岩壁与云线之间，守护每一次生态探索。","cultureMeaning":"贺兰山生态守护者","scene":["贺兰山","岩画","生态旅行"]},
+  {"id":"camel","name":"骆驼","personality":"沉稳、包容、有历史感","story":"它沿着驼铃与黄河记忆前行，把丝路故事带到今天。","cultureMeaning":"丝路文化传播者","scene":["黄河","沙坡头","丝路旅行"]},
+  {"id":"sand-fox","name":"沙狐","personality":"灵动、聪明、有探索欲","story":"它从荒漠与星光之间探出身影，发现宁夏文化的细节。","cultureMeaning":"荒漠生态精灵","scene":["腾格里沙漠","西夏文化","夜游"]}
+]

@@ -1,0 +1,1 @@
+.diagnostics{padding-bottom:60rpx}.diagnostics .card{display:flex;justify-content:space-between;gap:20rpx;margin-top:16rpx;padding:24rpx;border-radius:22rpx;background:#fff8ec;color:#76563a}.diagnostics .value{color:#174f50;font-weight:700;text-align:right}.diagnostics .sub{margin:12rpx 0 22rpx;color:#8a7967;font-size:22rpx}

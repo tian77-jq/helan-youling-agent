@@ -1,0 +1,12 @@
+<view class="create-config">
+  <view class="config-hero"><view class="eyebrow">CREATE YOUR NINGXIA STORY</view><view class="config-title">开始共创</view><view class="config-copy">先选文化主题，再让你的旅行伙伴把故事变成图像。</view></view>
+  <view class="config-block"><view class="block-title">文化场景</view><scroll-view scroll-x class="scene-tabs"><view wx:for="{{scenes}}" wx:key="id" class="scene-tab {{scene.id==item.id?'active':''}}" data-scene="{{item.id}}" bindtap="chooseScene">{{item.icon}} {{item.title}}</view></scroll-view><view class="selected-note">{{scene.note}}</view></view>
+  <view class="config-block"><view class="block-title">选择一个主题</view><view class="chip-row"><text wx:for="{{scene.subScenes}}" wx:key="0" class="chip {{subScene==item[0]?'active':''}}" data-id="{{item[0]}}" bindtap="chooseSub">{{item[1]}}</text></view></view>
+  <view class="config-block"><view class="block-title">我的旅行伙伴</view><view class="pet-grid"><view wx:for="{{pets}}" wx:key="id" class="pet-card {{pet==item.id?'active':''}}" data-id="{{item.id}}" bindtap="choosePet"><view class="pet-icon">{{item.icon}}</view><view class="pet-name">{{item.name}} · {{item.animal}}</view><view class="pet-role">{{item.role}}</view><view class="pet-keywords">{{item.keywords}}</view></view></view></view>
+  <view class="config-block"><view class="block-title">视觉风格</view><view class="style-grid"><view wx:for="{{styles}}" wx:key="id" class="style-card {{style==item.id?'active':''}}" data-id="{{item.id}}" bindtap="chooseStyle"><view>{{item.name}}</view><text>{{item.hint}}</text></view></view></view>
+  <view class="config-block"><view class="block-title">输出类型</view><view class="chip-row"><text wx:for="{{outputTypes}}" wx:key="id" class="chip {{outputType==item.id?'active':''}}" data-id="{{item.id}}" bindtap="chooseOutput">{{item.name}} · {{item.ratio}}</text></view></view>
+  <view class="config-block"><view class="block-title">写一句你的旅行故事</view><textarea class="story-input" maxlength="120" value="{{userPrompt}}" bindinput="inputStory" placeholder="例如：我是一名来到宁夏的大学生，想留下属于我的西夏文化纪念"></textarea><view class="story-hint">不需要写复杂提示词，宁夏文化增强会自动补全画面。</view></view>
+  <button class="generate-btn" loading="{{loading}}" disabled="{{loading}}" bindtap="generate">{{loading?'正在让萌宠创作…':'生成我的宁夏纪念作品'}}</button>
+  <view class="ai-disclosure">提交即表示你知悉：作品由 AI 生成/合成，仅用于文旅创意体验；请勿输入个人敏感信息或他人肖像，保存文件会保留显式 AI 标识。</view>
+  <view class="quota-foot">真实景区优先 · 未收录场景由腾讯混元生成效果预览</view>
+</view>

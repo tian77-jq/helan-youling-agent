@@ -1,0 +1,18 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'..');
+const exists=p=>fs.existsSync(path.join(root,p));
+const text=p=>fs.readFileSync(path.join(root,p),'utf8');
+const errors=[];
+const required=['utils/ai-orchestrator.js','utils/cloud-ai.js','utils/conversation-gateway.js','vision-agent/prompt-builder.js','vision-agent/style-manager.js','vision-agent/image-provider.js','prompt-library/travel.md','prompt-library/culture.md','prompt-library/image.md','AI_GOLD_DEMO_SCRIPT.md','docs/HUNYUAN_TECH_INNOVATION.md','providers/hunyuan-image-provider.js'];
+for(const p of required) if(!exists(p)) errors.push('缺少：'+p);
+if(!/HUNYUAN_MODE/.test(text('providers/hunyuan-provider.js'))) errors.push('缺少 HUNYUAN_MODE');
+if(!/LOCAL_DEMO_MODE/.test(text('config/cloud.js'))) errors.push('缺少 LOCAL_DEMO_MODE');
+if(!/source|knowledgeIds|guardPlan/.test(text('utils/ai-orchestrator.js'))) errors.push('灵游服务未输出本地证据标记');
+const app=JSON.parse(text('app.json'));
+for(const p of app.pages||[]) for(const ext of ['.js','.wxml','.wxss']) if(!exists(p+ext)) errors.push('页面缺少：'+p+ext);
+const report=['# HUNYUAN GOLD READY REPORT','',`生成时间：${new Date().toISOString()}`,`状态：${errors.length?'FAIL':'PASS'}`,'',`- AI Orchestrator：${exists('utils/ai-orchestrator.js')?'已具备':'缺失'}`,`- Cloud AI：${exists('utils/cloud-ai.js')?'已具备':'缺失'}`,`- Vision Agent：${exists('vision-agent/prompt-builder.js')?'已具备':'缺失'}`,`- Prompt Library：${exists('prompt-library/image.md')?'已具备':'缺失'}`,`- Demo：${exists('AI_GOLD_DEMO_SCRIPT.md')?'已具备':'缺失'}`,'- 真实混元调用：需部署云函数、配置额度并在真机验证后启用','- 真机、用户和景区合作证据：不由脚本伪造','','## 错误',...(errors.length?errors.map(e=>'- '+e):['- 无'])].join('\n')+'\n';
+fs.mkdirSync(path.join(root,'docs'),{recursive:true});
+fs.writeFileSync(path.join(root,'docs','HUNYUAN_GOLD_READY_REPORT.md'),report);
+console.log(JSON.stringify({status:errors.length?'FAIL':'PASS',errors,report:'docs/HUNYUAN_GOLD_READY_REPORT.md'},null,2));
+if(errors.length) process.exitCode=1;

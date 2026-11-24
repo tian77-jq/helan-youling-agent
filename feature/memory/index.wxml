@@ -1,0 +1,16 @@
+<view class="memory-page">
+  <view class="memory-head"><view class="kicker">MY NINGXIA MEMORY</view><view class="title">我的宁夏旅行纪念</view><view class="subtitle">选择一处风景、一只萌宠，再写下一句当时的心情。</view></view>
+  <view class="section-label">1 · 选择旅行场景</view><scroll-view scroll-x class="place-scroll"><view class="place-row"><view class="place-card {{placeId===item.id?'active':''}}" wx:for="{{attractions}}" wx:key="id" data-id="{{item.id}}" bindtap="selectPlace"><image src="{{item.image}}" mode="aspectFit" lazy-load></image><view>{{item.displayName}}</view></view></view></scroll-view>
+  <view class="section-label">2 · 选择随行萌宠</view><view class="agent-row"><view class="agent-chip {{agentId===item.id?'active':''}}" wx:for="{{agents}}" wx:key="id" data-id="{{item.id}}" bindtap="selectAgent"><text>{{item.avatar}}</text><view><view>{{item.name}}</view><text>{{item.role}}</text></view></view></view>
+  <view class="section-label">3 · 留下一句话</view><textarea class="note-input" maxlength="100" placeholder="第一次来宁夏，今天阳光特别好。" value="{{note}}" bindinput="inputNote"></textarea>
+  <button class="generate" bindtap="generate">生成旅行纪念卡</button>
+
+  <view wx:if="{{generated}}" class="generated-area">
+    <view class="memory-card">
+      <image class="card-image" src="{{card.image}}" mode="aspectFill"></image><view class="card-mask"></view>
+      <view class="card-copy"><view class="card-kicker">贺兰有灵 · NINGXIA</view><view class="card-place">{{card.placeName}}</view><view class="card-agent">{{card.agent.avatar}} 与 {{card.agent.name}} 同行</view><view class="card-memory">{{card.copy}}</view><view class="card-date">{{card.createdAt}}</view></view>
+    </view>
+    <view class="action-grid"><button bindtap="save">{{saved?'已保存':'保存到我的纪念'}}</button><button bindtap="copy">复制纪念文案</button></view><button class="share" open-type="share">分享给微信好友</button>
+    <view class="save-note">当前稳定版保存结构化纪念与文案；纪念卡图片导出需在后续接入合规的画布保存能力。</view>
+  </view>
+</view>

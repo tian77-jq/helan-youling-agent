@@ -1,0 +1,5 @@
+[
+  {"id":"kb-helan-mountain","name":"贺兰山国家森林公园","description":"贺兰山生态山地体验。","source":"项目宁夏景区资料","category":"scenic","tags":["生态","山地"],"related_ip":["rock-goat"]},
+  {"id":"kb-xixia","name":"西夏文化","description":"通过西夏陵与岩画认识宁夏历史。","source":"项目宁夏文化资料","category":"history","tags":["西夏陵","岩画"],"related_ip":["camel","rock-goat"]},
+  {"id":"kb-eight-tea","name":"八宝茶","description":"宁夏待客茶饮，甜润有层次。","source":"项目宁夏美食资料","category":"food","tags":["茶饮","伴手礼"],"related_ip":["camel"]}
+]

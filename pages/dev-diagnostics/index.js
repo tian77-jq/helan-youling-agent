@@ -1,0 +1,5 @@
+const config=require('../../config/cloud')
+const trace=require('../../utils/ai-experience-trace')
+const host=require('../../adapters/integration/zhiyou-ningxia/index.js')
+const {registry}=require('../../design-tokens/scene-assets')
+Page({data:{build:'',environment:'DEMO',knowledge:'LOCAL_APPROVED',hunyuan:'CONFIGURED_LAZY',image:'LOCAL_SCENE_FALLBACK',host:'PASS',buyerData:'PASS',sceneRegistry:'PASS',rights:'PROJECT_OWNED_ORIGINAL_ONLY',lastTrace:null,errorTaxonomy:0},onLoad(){const app=getApp();this.setData({build:app.globalData.buildId||'unknown',environment:config.AI_MODE==='hybrid'?'HYBRID_DEMO':'LOCAL_DEMO',hunyuan:config.cloudAiModel||'unavailable',host:host.HOST_PLATFORM,buyerData:'CANONICAL_SCHEMA',sceneRegistry:Object.keys(registry).length+' registered scenes',lastTrace:wx.getStorageSync('hly_last_ai_trace')||null,errorTaxonomy:Object.keys(trace.ERROR_TAXONOMY).length})}})

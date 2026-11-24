@@ -1,0 +1,9 @@
+{
+  "name": "helan-scenic-ai-engine",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "verify:release": "node scripts/verify-release.js",
+    "verify:audit": "node scripts/verify-release.js --code-only"
+  }
+}

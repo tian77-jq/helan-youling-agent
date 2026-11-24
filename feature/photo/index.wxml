@@ -1,0 +1,21 @@
+<view class="photo-page">
+  <view class="photo-hero"><view class="kicker">VISION × NINGXIA</view><view class="title">拍一拍 · 识宁夏</view><view class="subtitle">拍下景区、美食或文化物件，AI 先匹配宁夏知识库，再由岩羊、沙狐或双峰驼讲解；认不准时不会猜。</view><view class="privacy">照片仅用于本次图片理解，不写入本地相册或用户资料。</view></view>
+  <view class="upload-card" bindtap="choose">
+    <image wx:if="{{imagePath}}" src="{{imagePath}}" mode="aspectFill"></image>
+    <view wx:else class="upload-empty"><view class="camera">📷</view><view>拍摄 / 从相册选择</view><text>建议选择主体清晰的景区、美食或宁夏特色物件</text></view>
+    <view wx:if="{{recognizing}}" class="recognizing"><view class="spinner">✦</view><view>正在识别图片并核对宁夏知识库…</view></view>
+  </view>
+  <button class="choose-btn" disabled="{{recognizing}}" bindtap="choose">{{imagePath?'换一张照片':'选择照片开始识别'}}</button>
+  <view wx:if="{{error}}" class="error-card"><view>{{error}}</view><button wx:if="{{imagePath}}" bindtap="recognize">重新识别</button></view>
+
+  <view wx:if="{{hasResult}}" class="result-card">
+    <view class="result-label">{{result.manual?'知识库讲解':'识别结果'}}</view><view class="result-name">{{result.name}}</view>
+    <view class="confidence" wx:if="{{result.confidence!==null}}">可信度 {{result.confidenceLabel}}</view>
+    <view class="tags"><text wx:for="{{result.culturalTags}}" wx:key="*this">{{item}}</text></view>
+    <view wx:if="{{explanation}}" class="agent-box"><view class="agent-head"><text>{{explanation.agent.avatar}}</text><view><view>{{explanation.agent.name}} · {{explanation.agent.role}}</view><text>{{explanation.agent.focus}}</text></view></view><view class="agent-copy">{{explanation.content}}</view></view>
+    <view class="mode-grid"><button wx:for="{{modes}}" wx:key="id" data-mode="{{item.id}}" bindtap="changeMode">{{item.label}}</button></view>
+    <view class="official-note">{{explanation.safetyNote}}</view><button class="trip-btn" bindtap="goTrip">加入我的 AI 行程</button>
+  </view>
+
+  <view class="knowledge-section"><view class="section-title">也可以直接从知识库问萌宠</view><view class="knowledge-grid"><view class="knowledge-card" wx:for="{{topics}}" wx:key="id" data-id="{{item.id}}" bindtap="selectTopic"><image src="{{item.image}}" mode="aspectFit" lazy-load></image><view>{{item.displayName}}</view></view></view></view>
+</view>

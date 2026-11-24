@@ -1,0 +1,26 @@
+openapi: 3.1.1
+info:
+  title: Scenic AI Experience Engine
+  version: 0.1.0
+paths:
+  /v1/experience/plan:
+    post:
+      operationId: planExperience
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanRequest'
+      responses:
+        '200':
+          description: Experience plan result
+components:
+  schemas:
+    PlanRequest:
+      type: object
+      required: [scenicId, duration]
+      properties:
+        scenicId: {type: string}
+        duration: {type: integer, minimum: 1}
+        preferences: {type: array, items: {type: string}}

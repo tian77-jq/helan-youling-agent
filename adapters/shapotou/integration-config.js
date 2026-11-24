@@ -1,0 +1,1 @@
+module.exports={scenicId:'shapotou',mode:'adapter-only',capabilities:require('../../core/capability-flags'),externalSystems:{ticketing:{mode:'hook-only'},hotel:{mode:'hook-only'},membership:{mode:'hook-only'},realtime:{mode:'optional-hook'}},dataPolicy:{collectOnly:'minimum journey context',secrets:'server-side only',auditLog:true,officialFreshness:'buyer-owned'}}

@@ -1,0 +1,7 @@
+<view class="create-page">
+  <view class="create-hero"><view class="eyebrow">HELAN SPIRIT · AI CO-CREATION</view><view class="hero-title">贺兰灵境</view><view class="hero-sub">AI文旅共创空间</view><view class="hero-copy">选择宁夏文化主题与萌宠伙伴，生成属于你的宁夏旅行纪念作品。</view><view class="hero-badge">宁夏专属 · 萌宠陪伴 · 可保存分享</view></view>
+  <view class="quota-card"><view><view class="quota-label">今日创作额度</view><view class="quota-number">{{quota.remaining}}<text> 次</text></view></view><view class="quota-note">每次生成一张高质量主图<view class="line-break">再次生成会消耗今日额度</view></view></view>
+  <view class="section-head"><view><view class="section-title">选择一个共创场景</view><view class="section-note">不是通用画图，是宁夏文化纪念</view></view></view>
+  <view class="scene-grid"><view class="scene-card {{item.accent}}" wx:for="{{scenes}}" wx:key="id" data-scene="{{item.id}}" bindtap="openScene"><view class="scene-icon">{{item.icon}}</view><view class="scene-title">{{item.title}}</view><view class="scene-copy">{{item.short}}</view><view class="scene-link">开始共创 →</view></view></view>
+  <view class="difference-card"><view class="difference-title">为什么是贺兰灵境？</view><view class="difference-copy">我们把黄河、西夏、贺兰山生态、宁夏美食与三只原创萌宠结合，让一次旅行变成可传播的文化故事。</view><view class="difference-tags"><text>文化增强</text><text>IP人格</text><text>旅行纪念</text><text>景区联名</text></view></view>
+</view>

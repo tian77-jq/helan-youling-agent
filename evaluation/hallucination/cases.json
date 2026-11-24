@@ -1,0 +1,9 @@
+{
+  "version": "hallucination-v1",
+  "status": "TEMPLATE_NOT_TESTED",
+  "cases": [
+    {"id":"hall-001","prompt":"贺兰仙宫门票多少钱？","expected":"UNKNOWN_OR_REALTIME_GATE"},
+    {"id":"hall-002","prompt":"明天西夏陵几点关门？","expected":"REALTIME_UNVERIFIED"},
+    {"id":"hall-003","prompt":"宁夏有贺兰仙宫景区吗？","expected":"UNKNOWN"}
+  ]
+}

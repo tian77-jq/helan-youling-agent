@@ -1,0 +1,16 @@
+const manager=require('./conversation-manager')
+const parser=require('./tourist-context-parser')
+const entityParser=require('./tourist-entity-parser')
+const KEY='tourist-context'
+const memoryStore=new Map()
+const FIELDS=['first_visit','companions','age','time','location','budget','preferences','action_limits']
+function empty(sessionId){return {sessionId:sessionId||'',first_visit:false,companions:[],age:null,time:null,location:null,budget:null,preferences:[],action_limits:[]}}
+function storeKey(sessionId){return `hly_${KEY}_${sessionId}`}
+function load(sessionId){if(!sessionId)return empty('');if(typeof wx!=='undefined'&&wx&&wx.getStorageSync)return Object.assign(empty(sessionId),wx.getStorageSync(storeKey(sessionId))||{});return Object.assign(empty(sessionId),memoryStore.get(sessionId)||{})}
+function save(value){const next=Object.assign(empty(value&&value.sessionId),value||{});next.companions=[...new Set(next.companions||[])];next.preferences=[...new Set(next.preferences||[])];next.action_limits=[...new Set(next.action_limits||[])];memoryStore.set(next.sessionId,next);if(typeof wx!=='undefined'&&wx&&wx.setStorageSync)wx.setStorageSync(storeKey(next.sessionId),next);return next}
+function fromParsed(parsed,sessionId){const result=empty(sessionId);result.first_visit=Boolean(parsed.constraints&&parsed.constraints.includes('first_visit'));result.companions=(parsed.companions||[]).map(x=>x==='elderly'?'parents':x);result.age=parsed.age||null;result.time=parsed.time||null;result.location=parsed.city||null;result.budget=parsed.budget||null;result.preferences=[...(parsed.interests||[])];result.action_limits=(parsed.constraints||[]).filter(x=>x!=='first_visit');return result}
+function ingest(text,sessionId,prior){const current=Object.assign(empty(sessionId),prior||load(sessionId));const basic=parser.parseTouristContext(text);const entities=entityParser.parseTouristEntities(text);const parsed=fromParsed(Object.assign({},basic,{companions:[...new Set([...(basic.companions||[]),...(entities.companions||[])])],budget:entities.budget||basic.budget,city:(entities.cities&&entities.cities[0])||basic.city,interests:[...new Set([...(basic.interests||[]),...(entities.preferences||[])])],constraints:[...new Set([...(basic.constraints||[]),...(entities.constraints||[])])]}),sessionId);const next=Object.assign({},current);next.first_visit=current.first_visit||parsed.first_visit;next.companions=[...new Set([...(current.companions||[]),...parsed.companions])];next.age=parsed.age||current.age;next.time=parsed.time||current.time;next.location=parsed.location||current.location;next.budget=parsed.budget||current.budget;next.preferences=[...new Set([...(current.preferences||[]),...parsed.preferences])];next.action_limits=[...new Set([...(current.action_limits||[]),...parsed.action_limits])];return save(next)}
+function clear(sessionId){return save(empty(sessionId))}
+function summary(context){const c=context||empty('');return {first_visit:c.first_visit,companions:c.companions,age:c.age,time:c.time,location:c.location,budget:c.budget,preferences:c.preferences,action_limits:c.action_limits}}
+function prompt(context){const c=summary(context);return JSON.stringify(c)}
+module.exports={KEY,empty,load,save,ingest,clear,summary,prompt,fields:FIELDS,restoreSession:manager.restoreSession}

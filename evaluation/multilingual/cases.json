@@ -1,0 +1,6 @@
+{
+  "version": "multilingual-v1",
+  "status": "TEMPLATE_NOT_TESTED",
+  "locales": ["zh-CN","en-US","ar"],
+  "entities": ["西夏陵","贺兰山","黄河","葡萄酒","枸杞","宁夏美食"]
+}

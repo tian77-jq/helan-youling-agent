@@ -1,0 +1,6 @@
+{
+  "schemaVersion":"1.0",
+  "entries":[],
+  "policy":"Facts may inform research; media and copied expression do not enter production without rights review.",
+  "requiredFields":["knowledgeId","fact","paraphrase","sourceUrl","publisher","sourceType","retrievedAt","evidenceLevel","copyrightNote","mediaCopied"]
+}

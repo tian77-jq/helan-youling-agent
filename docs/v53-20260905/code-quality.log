@@ -1,0 +1,104 @@
+{
+  "lazyCodeLoading": "disabled",
+  "ignoreDevUnusedFiles": true,
+  "customComponentDeclarations": 0,
+  "missingRequires": [],
+  "ignoredRuntimeDependencies": [],
+  "unusedJs": [
+    "adapters/integration/zhiyou-ningxia/index.js",
+    "adapters/shapotou/experience-types.js",
+    "adapters/shapotou/index.js",
+    "adapters/shapotou/integration-config.js",
+    "adapters/shapotou/knowledge.js",
+    "adapters/shapotou/memory-templates.js",
+    "adapters/shapotou/scenic-profile.js",
+    "adapters/shapotou/share-templates.js",
+    "adapters/shapotou/stories.js",
+    "config/build-modes.js",
+    "core/capability-flags.js",
+    "core/contracts.js",
+    "core/experience-orchestrator.js",
+    "services/scenic-trip-application.js",
+    "utils/scenic-runtime.js"
+  ],
+  "mainPackageUnusedJs": [
+    "adapters/integration/zhiyou-ningxia/index.js",
+    "adapters/shapotou/experience-types.js",
+    "adapters/shapotou/index.js",
+    "adapters/shapotou/integration-config.js",
+    "adapters/shapotou/knowledge.js",
+    "adapters/shapotou/memory-templates.js",
+    "adapters/shapotou/scenic-profile.js",
+    "adapters/shapotou/share-templates.js",
+    "adapters/shapotou/stories.js",
+    "config/build-modes.js",
+    "core/capability-flags.js",
+    "core/contracts.js",
+    "core/experience-orchestrator.js",
+    "services/scenic-trip-application.js",
+    "utils/scenic-runtime.js"
+  ],
+  "mediaOver200K": [],
+  "largestMedia": [
+    {
+      "file": "assets/thumbs/food-collab/overview_food_map.jpg",
+      "bytes": 79836
+    },
+    {
+      "file": "assets/thumbs/banners/ningxia-hero-v1.jpg",
+      "bytes": 61809
+    },
+    {
+      "file": "assets/thumbs/products/avatar_camel_ai.jpg",
+      "bytes": 49653
+    },
+    {
+      "file": "assets/thumbs/banners/product_matrix.jpg",
+      "bytes": 48272
+    },
+    {
+      "file": "assets/thumbs/products/avatar_fox_ai.jpg",
+      "bytes": 45829
+    },
+    {
+      "file": "assets/thumbs/scenic-collab/ningxia_museum.jpg",
+      "bytes": 34722
+    },
+    {
+      "file": "assets/thumbs/scenic-collab/zhenbeibao_fox_collab_banner.jpg",
+      "bytes": 34581
+    },
+    {
+      "file": "assets/thumbs/food-collab/overview_ip_showcase.jpg",
+      "bytes": 34135
+    },
+    {
+      "file": "assets/thumbs/products/avatar_yanyang_ai.jpg",
+      "bytes": 33538
+    },
+    {
+      "file": "assets/thumbs/scenic-collab/shapotou_camel_collab_banner.jpg",
+      "bytes": 32712
+    },
+    {
+      "file": "assets/thumbs/food-collab/wuzhong.jpg",
+      "bytes": 24695
+    },
+    {
+      "file": "assets/thumbs/food-collab/yinchuan.jpg",
+      "bytes": 24591
+    },
+    {
+      "file": "assets/thumbs/food-collab/zhongwei.jpg",
+      "bytes": 24226
+    },
+    {
+      "file": "assets/thumbs/scenic-collab/shuidonggou_banner.jpg",
+      "bytes": 20077
+    },
+    {
+      "file": "assets/thumbs/scenic-collab/helan_rock_painting_banner.jpg",
+      "bytes": 19615
+    }
+  ]
+}

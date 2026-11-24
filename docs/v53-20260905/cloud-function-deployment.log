@@ -1,0 +1,40 @@
+{
+  "at": "2026-09-05T08:56:39.188Z",
+  "environment": "cloudbase-d6g1u2dzk45c62fc1",
+  "environmentRole": "UNKNOWN (separate prod-* environment exists)",
+  "deploymentTargetConfirmed": false,
+  "cloudDeploymentPerformed": false,
+  "userConfirmationRequired": true,
+  "functions": [
+    {
+      "functionName": "generateImage",
+      "localHash": "994706de4f9dd91073b3222dab9223cdb1511c8099999d71b3a6797f3527bd50",
+      "localModifiedAt": "2026-09-05T02:55:54.113Z",
+      "deployedVersion": "$LATEST",
+      "deployedRuntime": "Nodejs16.13",
+      "deployedModifiedAt": "2026-08-26 12:08:49",
+      "status": "Deployment completed",
+      "deployedHash": "UNAVAILABLE_FROM_DETAIL",
+      "versionMatch": false,
+      "needsDeploy": true,
+      "runtimeImpact": "identity-scoped cache/idempotency code is local only"
+    },
+    {
+      "functionName": "ttsSpeak",
+      "localHash": "de486a834678cdce751b11e032a2ead1fdc5e00e632c1c8b1085f07e44d97424",
+      "localModifiedAt": "2026-08-28T06:30:41.425Z",
+      "deployedVersion": "$LATEST",
+      "deployedRuntime": "Nodejs16.13",
+      "deployedModifiedAt": "2026-08-28 14:32:55",
+      "status": "Deployment completed",
+      "deployedHash": "UNAVAILABLE_FROM_DETAIL",
+      "versionMatch": false,
+      "needsDeploy": true,
+      "runtimeImpact": "no local change in this closure"
+    }
+  ],
+  "commands": {
+    "readOnly": "tcb env list --json -e cloudbase-d6g1u2dzk45c62fc1 && tcb fn detail <name> --json -e cloudbase-d6g1u2dzk45c62fc1",
+    "deployAfterConfirmation": "tcb fn deploy generateImage --force --json -e cloudbase-d6g1u2dzk45c62fc1"
+  }
+}

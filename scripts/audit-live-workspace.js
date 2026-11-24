@@ -1,0 +1,35 @@
+const fs=require('fs'),path=require('path'),assert=require('assert')
+const automator=require('C:/Users/32862/AppData/Local/npm-cache/_npx/cf54c79a0524a233/node_modules/miniprogram-automator')
+const dir=path.resolve('docs/audit-20260905')
+;(async()=>{
+ const mini=await automator.connect({wsEndpoint:'ws://127.0.0.1:9420'})
+ const invoke=(method,...args)=>mini.evaluate((method,args)=>{setTimeout(()=>getCurrentPages().slice(-1)[0][method](...args),0);return true},method,args)
+ const read=field=>mini.evaluate(field=>{let value=getCurrentPages().slice(-1)[0].data;for(const key of field.split('.'))value=value&&value[key];return {value}},field).then(result=>result.value)
+ const report={at:new Date().toISOString(),sourceHash:require('./audit-fingerprint')(),scope:'SIMULATOR_LIVE_AI',cases:[]}
+ const watchdog=setTimeout(()=>{report.error='AUTOMATION_TIMEOUT';fs.writeFileSync(path.join(dir,'live-workspace.json'),JSON.stringify(report,null,2));mini.disconnect();process.exitCode=1},150000)
+ try{
+ console.log('Connected; opening QA page')
+ const page=await mini.reLaunch('/pages/trip/index?panel=qa');await page.waitFor(1500)
+ console.log('QA page ready; submitting night question')
+ await invoke('inputPrompt',{detail:{value:'今晚银川去哪？'}})
+ await invoke('generate')
+ for(let i=0;i<50;i++){await page.waitFor(1000);if(!(await read('loading')))break}
+ const answer=await read('petAnswer');report.cases.push({name:'night-live',source:answer&&answer.source,hasAnswer:!!(answer&&(answer.answer||answer.answerText)),knowledgeIds:answer&&answer.knowledgeIds})
+ console.log(JSON.stringify(report.cases[0]))
+ await mini.screenshot({path:path.join(dir,'night-live.png')})
+ await invoke('switchWorkspacePanel',{currentTarget:{dataset:{panel:'trip'}}})
+ await invoke('inputPrompt',{detail:{value:'明天带父母在银川玩一天，不想走太多路'}})
+ await invoke('generate')
+ for(let i=0;i<50;i++){await page.waitFor(1000);if(!(await read('loading')))break}
+ const plan=await read('plan');report.cases.push({name:'trip-live',source:plan&&plan.aiSource,days:plan&&plan.days&&plan.days.length})
+ await mini.screenshot({path:path.join(dir,'trip-live.png')})
+ await invoke('switchWorkspacePanel',{currentTarget:{dataset:{panel:'qa'}}})
+ const restored=await read('petAnswer');assert.deepStrictEqual(restored,answer)
+ await invoke('switchWorkspacePanel',{currentTarget:{dataset:{panel:'create'}}})
+ await invoke('selectMemorySource',{currentTarget:{dataset:{source:'qa'}}})
+ await invoke('composeMemory');assert(await read('workspace.createState.card'))
+ await mini.screenshot({path:path.join(dir,'create-live.png')})
+ report.cases.push({name:'workspace-state',status:'SIMULATOR_PASS'})
+ }catch(error){report.error=String(error)}
+ clearTimeout(watchdog);fs.writeFileSync(path.join(dir,'live-workspace.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));mini.disconnect()
+})().catch(error=>{console.error(String(error));process.exitCode=1})

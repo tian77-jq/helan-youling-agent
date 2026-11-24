@@ -1,0 +1,5 @@
+[
+  {"id":"helan-mountain","name":"贺兰山国家森林公园","location":"银川","description":"感受贺兰山地貌与生态环境。","bestTime":"春秋","tags":["山地","生态"],"images":["/assets/thumbs/scenic-collab/helan_mountain_banner.jpg"]},
+  {"id":"helan-rock-painting","name":"贺兰山岩画","location":"银川","description":"以岩画了解古代先民的生活记忆。","bestTime":"春秋","tags":["岩画","西夏文化"],"images":["/assets/thumbs/scenic-collab/helan_rock_painting_banner.jpg"]},
+  {"id":"shapotou","name":"沙坡头","location":"中卫","description":"在沙漠、黄河与绿洲之间体验宁夏。","bestTime":"春夏秋","tags":["沙漠","黄河"],"images":["/assets/thumbs/scenic-collab/shapotou_banner.jpg"]}
+]

@@ -1,0 +1,9 @@
+{
+  "version": "trip-v1",
+  "status": "TEMPLATE_NOT_TESTED",
+  "cases": [
+    {"id":"trip-001","category":"basic","locale":"zh-CN","prompt":"第一次来宁夏，两天时间，喜欢历史和美食","expected":{"days":2,"interests":["history","food"]}},
+    {"id":"trip-002","category":"elderly","locale":"zh-CN","prompt":"明天带父母在银川玩一天，不想走太多路","expected":{"days":1,"pace":"relaxed","elderly":true}},
+    {"id":"trip-003","category":"children","locale":"zh-CN","prompt":"带7岁孩子去沙坡头，有什么安排？","expected":{"children":true,"city":"中卫"}}
+  ]
+}

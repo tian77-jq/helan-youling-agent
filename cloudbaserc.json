@@ -1,0 +1,36 @@
+{
+  "envId": "cloudbase-d6g1u2dzk45c62fc1",
+  "functionRoot": "./cloudfunctions",
+  "functions": [
+    {
+      "name": "generateImage",
+      "dir": "./cloudfunctions/generateImage",
+      "handler": "index.main",
+      "runtime": "Nodejs16.13",
+      "timeout": 60,
+      "memorySize": 1024,
+      "installDependency": true,
+      "ignore": ["node_modules", "node_modules/**/*", "*.log"]
+    },
+    {
+      "name": "ttsSpeak",
+      "dir": "./cloudfunctions/ttsSpeak",
+      "handler": "index.main",
+      "runtime": "Nodejs16.13",
+      "timeout": 120,
+      "memorySize": 256,
+      "installDependency": true,
+      "ignore": ["node_modules", "node_modules/**/*", "*.log"]
+    },
+    {
+      "name": "codingPlanProxy",
+      "dir": "./cloudfunctions/codingPlanProxy",
+      "handler": "index.main",
+      "runtime": "Nodejs20.19",
+      "timeout": 60,
+      "memorySize": 256,
+      "installDependency": false,
+      "ignore": ["node_modules", "node_modules/**/*", "*.log"]
+    }
+  ]
+}

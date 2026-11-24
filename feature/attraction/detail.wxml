@@ -1,0 +1,8 @@
+<view class="page" wx:if="{{item}}">
+  <image class="cover" src="{{item.image}}" mode="aspectFill"></image>
+  <view class="title">{{item.name['zh-CN']}}</view>
+  <view class="pill-row"><text class="tag">{{item.city}}</text><text class="tag" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text></view>
+  <view class="card section"><view class="section-title">知识库介绍</view><view class="muted">{{item.intro}}</view><view class="label">为什么值得去</view><view class="muted">{{item.suitableText}}</view><view class="label">行程提示</view><view class="muted">{{item.tips}}</view></view>
+  <view class="card agent-card"><view class="section-title">{{agent.avatar}} {{agent.name}} · {{agent.role}}</view><view class="muted">我可以基于宁夏知识库继续讲解这个目的地。</view></view>
+  <button class="btn btn-full" bindtap="ask">听萌宠讲</button><button class="btn btn-secondary btn-full" bindtap="add">加入 AI 行程</button><button class="btn btn-secondary btn-full" bindtap="goHome">返回首页</button>
+</view>

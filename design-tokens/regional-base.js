@@ -1,0 +1,1 @@
+module.exports={brand:{ink:'#174F50',sand:'#A56E38',gold:'#D4A45F',paper:'#FFFAF0',text:'#3B3026',muted:'#8E7963',line:'#EADBC6'},typography:{display:'60rpx',title:'38rpx',body:'28rpx',caption:'22rpx'},spacing:{xs:'8rpx',sm:'16rpx',md:'24rpx',lg:'36rpx',xl:'56rpx'},radius:{card:'24rpx',pill:'999rpx'},accessibility:{minTouchTarget:'88rpx',reducedMotionClass:'motion-reduced'}}

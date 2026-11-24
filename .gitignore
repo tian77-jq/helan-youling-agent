@@ -1,0 +1,33 @@
+# Windows
+[Dd]esktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+
+# Node.js
+node_modules/
+
+# 云函数依赖与缓存
+**/node_modules/
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# 密钥与环境文件（凭据只走服务端环境变量）
+.env
+.env.*
+!*.env.example
+
+# 微信开发者工具本地状态
+project.private.config.json
+
+# 编辑器与系统
+.idea/
+.vscode/
+*.swp

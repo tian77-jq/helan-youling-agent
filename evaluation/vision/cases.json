@@ -1,0 +1,6 @@
+{
+  "version": "vision-v1",
+  "status": "TEMPLATE_NOT_TESTED",
+  "imageSets": {"knownPositive":[],"food":[],"cultureEcology":[],"negativeUnknown":[]},
+  "metrics": ["knownRecognitionAccuracy","unknownRejectionRate","falseAttractionMatchRate","averageLatencyMs","p95LatencyMs","knowledgeVerificationPassRate"]
+}

@@ -1,0 +1,21 @@
+const fs=require('fs')
+const path=require('path')
+const root=path.resolve(__dirname,'..')
+const app=JSON.parse(fs.readFileSync(path.join(root,'app.json'),'utf8'))
+const errors=[];const warnings=[]
+const exists=p=>fs.existsSync(path.join(root,p))
+for(const page of app.pages){for(const ext of ['.js','.wxml','.wxss'])if(!exists(page+ext))errors.push(`主包页面缺少文件：${page+ext}`)}
+for(const item of (app.tabBar&&app.tabBar.list)||[])if(!app.pages.includes(item.pagePath))errors.push(`tabBar 页面不在 pages：${item.pagePath}`)
+for(const sub of app.subPackages||[]){for(const page of sub.pages){for(const ext of ['.js','.wxml','.wxss'])if(!exists(`${sub.root}/${page}${ext}`))errors.push(`分包页面缺少文件：${sub.root}/${page}${ext}`)}}
+const files=[];function walk(dir){if(!fs.existsSync(dir))return;for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,entry.name);if(entry.isDirectory()){if(!/^backup_before_/.test(entry.name)&&!['.git','node_modules'].includes(entry.name))walk(p)}else files.push(p)}}walk(root)
+const source=files.filter(f=>/\.(js|json|wxml|wxss)$/.test(f)&&!f.includes(`${path.sep}scripts${path.sep}`)).map(f=>fs.readFileSync(f,'utf8')).join('\n')
+for(const file of files.filter(f=>f.endsWith('.json'))){try{const json=JSON.parse(fs.readFileSync(file,'utf8'));for(const [name,target] of Object.entries(json.usingComponents||{})){if(!target.startsWith('wx://')){const base=path.resolve(path.dirname(file),target);if(!fs.existsSync(base)&&!fs.existsSync(base+'.js')&&!fs.existsSync(base+'.json'))errors.push(`组件不存在：${path.relative(root,file)} → ${name}=${target}`)}}}catch(e){errors.push(`JSON 无法解析：${path.relative(root,file)}`)}}
+const media=files.filter(f=>/\.(png|jpe?g|gif|webp|mp3|aac|m4a|wav)$/i.test(f)).map(f=>({file:path.relative(root,f).replace(/\\/g,'/'),bytes:fs.statSync(f).size}));const over=media.filter(x=>x.bytes>200*1024);if(over.length)errors.push(`媒体超过 200 KB：${over.map(x=>x.file).join(', ')}`)
+const cloudRoot=path.join(root,'cloudfunctions');const cloudFunctions=fs.existsSync(cloudRoot)?fs.readdirSync(cloudRoot,{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>x.name):[];for(const fn of cloudFunctions){if(!exists(`cloudfunctions/${fn}/index.js`))errors.push(`云函数缺少入口：${fn}/index.js`);if(!exists(`cloudfunctions/${fn}/package.json`))warnings.push(`云函数缺少 package.json：${fn}`)}
+const mainExcluded=f=>{const r=path.relative(root,f).replace(/\\/g,'/');const excludedDirs=['feature/','scripts/','docs/','cloudfunctions/','evaluation/','research/','validation/','validation-center/','growth-system/','partner-system/','operation/','operation-metrics/','business-model/','competition/','competition-defense/','competition-defense-final/','competition-demo/','agent/','digital_asset/','evidence/','knowledge-base/','gold-award-final-check/'];const rootDocs=['BUSINESS_MODEL.md','DATA_METRICS_DESIGN.md','PROJECT_EVIDENCE_MAP.md','DESIGN_SYSTEM.md','SCALING_STRATEGY.md','HUNYUAN_PRODUCTION_READY.md','PRODUCT_LOOP.md'];return excludedDirs.some(prefix=>r.startsWith(prefix))||r.startsWith('backup_before_')||r==='.git'||r==='PROJECT_HEALTH_REPORT.md'||rootDocs.includes(r)}
+const mainBytes=files.filter(f=>!mainExcluded(f)).reduce((n,f)=>n+fs.statSync(f).size,0);if(mainBytes>=1572864)errors.push(`主包估算超过 1.5 MiB：${mainBytes} 字节`)
+const requiredFiles=['services/image-service.js','services/cloud-service.js','utils/ai-orchestrator.js','utils/conversation-gateway.js'];requiredFiles.forEach(f=>{if(!exists(f))warnings.push(`建议补齐运行时服务文件：${f}`)})
+const report=['# PROJECT HEALTH REPORT','',`生成时间：${new Date().toISOString()}`,'',`状态：${errors.length?'FAIL':'PASS'}`,'',`主包估算：${mainBytes} 字节`,`媒体总数：${media.length}`,`媒体超过 200 KB：${over.length}`,`页面：${app.pages.length}，分包：${(app.subPackages||[]).length}`,`云函数：${cloudFunctions.join(', ')||'无'}`,`组件声明：${(source.match(/usingComponents/g)||[]).length}`,`按需注入：${app.lazyCodeLoading||'disabled'}`,'','## 错误',...(errors.length?errors.map(x=>`- ${x}`):['- 无']),'','## 警告',...(warnings.length?warnings.map(x=>`- ${x}`):['- 无'])].join('\n')
+const reportPath=path.join(root,'docs','PROJECT_HEALTH_REPORT.md')
+fs.writeFileSync(reportPath,report+'\n')
+console.log(JSON.stringify({status:errors.length?'FAIL':'PASS',mainBytes,mediaOver200K:over.length,cloudFunctions,errors,warnings,report:'docs/PROJECT_HEALTH_REPORT.md'},null,2));if(errors.length)process.exitCode=1

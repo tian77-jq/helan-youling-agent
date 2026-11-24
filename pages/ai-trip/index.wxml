@@ -1,0 +1,1 @@
+<view class="page"><view>{{error||"正在打开 AI 工作台…"}}</view><button wx:if="{{error}}" bindtap="goHome">返回首页</button></view>

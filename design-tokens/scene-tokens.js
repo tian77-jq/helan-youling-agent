@@ -1,0 +1,1 @@
+module.exports={MOUNTAIN:{accent:'#2C746E',surface:'#EEF4EC',verb:'RISE'},RIVER:{accent:'#3F88A1',surface:'#EEF7F8',verb:'FLOW'},DESERT:{accent:'#A56E38',surface:'#FFF3DF',verb:'REVEAL'},STAR:{accent:'#6E5B8D',surface:'#F2EFF8',verb:'GLOW'},SHAPOTOU:{accent:'#B9753C',surface:'#FFF0D8',verb:'FLOW_REVEAL_GLOW'}}

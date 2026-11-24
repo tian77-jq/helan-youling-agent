@@ -1,0 +1,286 @@
+{
+  "description": "贺兰有灵 AI 原生宁夏文旅智能体",
+  "packOptions": {
+    "ignore": [
+      {
+        "value": ".git",
+        "type": "folder"
+      },
+      {
+        "value": "scripts",
+        "type": "folder"
+      },
+      {
+        "value": "cloudfunctions",
+        "type": "folder"
+      },
+      {
+        "value": "cloudbaserc.json",
+        "type": "file"
+      },
+      {
+        "value": "docs",
+        "type": "folder"
+      },
+      {
+        "value": "assets/thumbs/intangible",
+        "type": "folder"
+      },
+      {
+        "value": "evaluation",
+        "type": "folder"
+      },
+      {
+        "value": "research",
+        "type": "folder"
+      },
+      {
+        "value": "validation",
+        "type": "folder"
+      },
+      {
+        "value": "validation-center",
+        "type": "folder"
+      },
+      {
+        "value": "growth-system",
+        "type": "folder"
+      },
+      {
+        "value": "partner-system",
+        "type": "folder"
+      },
+      {
+        "value": "operation",
+        "type": "folder"
+      },
+      {
+        "value": "operation-metrics",
+        "type": "folder"
+      },
+      {
+        "value": "business-model",
+        "type": "folder"
+      },
+      {
+        "value": "competition",
+        "type": "folder"
+      },
+      {
+        "value": "competition-defense",
+        "type": "folder"
+      },
+      {
+        "value": "competition-defense-final",
+        "type": "folder"
+      },
+      {
+        "value": "competition-demo",
+        "type": "folder"
+      },
+      {
+        "value": "agent",
+        "type": "folder"
+      },
+      {
+        "value": "digital_asset",
+        "type": "folder"
+      },
+      {
+        "value": "evidence",
+        "type": "folder"
+      },
+      {
+        "value": "knowledge-base",
+        "type": "folder"
+      },
+      {
+        "value": "gold-award-final-check",
+        "type": "folder"
+      },
+      {
+        "value": "prompts",
+        "type": "folder"
+      },
+      {
+        "value": "prompt-library",
+        "type": "folder"
+      },
+      {
+        "value": "digital-assets",
+        "type": "folder"
+      },
+      {
+        "value": "data",
+        "type": "folder"
+      },
+      {
+        "value": "business",
+        "type": "folder"
+      },
+      {
+        "value": "release-demo",
+        "type": "folder"
+      },
+      {
+        "value": "project.private.config.json",
+        "type": "file"
+      },
+      {
+        "value": "release",
+        "type": "folder"
+      },
+      {
+        "value": "pages/dev-diagnostics",
+        "type": "folder"
+      },
+      {
+        "value": "adapters/shapotou.js",
+        "type": "file"
+      },
+      {
+        "value": "adapters/shapotou/persona-binding.js",
+        "type": "file"
+      },
+      {
+        "value": "core/provider-contract.js",
+        "type": "file"
+      },
+      {
+        "value": "domain/trip-policy.js",
+        "type": "file"
+      },
+      {
+        "value": "ports/index.js",
+        "type": "file"
+      },
+      {
+        "value": "config/release-readiness.js",
+        "type": "file"
+      },
+      {
+        "value": "evidence-wall",
+        "type": "folder"
+      },
+      {
+        "value": "backup_before_assets_20260810",
+        "type": "folder"
+      },
+      {
+        "value": "backup_before_ip_story_banner_20260811",
+        "type": "folder"
+      },
+      {
+        "value": "backup_before_scenic_additions_20260811",
+        "type": "folder"
+      },
+      {
+        "value": "backup_before_scenic_collab_20260811",
+        "type": "folder"
+      },
+      {
+        "value": "README.md",
+        "type": "file"
+      },
+      {
+        "value": "assets/asset-manifest.json",
+        "type": "file"
+      },
+      {
+        "value": "AI_INTENT_ROUTING_REPORT.md",
+        "type": "file"
+      },
+      {
+        "value": "VISION_RUNTIME_REPORT.md",
+        "type": "file"
+      },
+      {
+        "value": "AI_GOLD_DEMO_SCRIPT.md",
+        "type": "file"
+      },
+      {
+        "value": "IP_WHITEPAPER.md",
+        "type": "file"
+      },
+      {
+        "value": "PRODUCT_PPT_ALIGNMENT.md",
+        "type": "file"
+      },
+      {
+        "value": "TECHNICAL_WHITEPAPER.md",
+        "type": "file"
+      },
+      {
+        "value": "DESIGN_SYSTEM.md",
+        "type": "file"
+      },
+      {
+        "value": "SCALING_STRATEGY.md",
+        "type": "file"
+      },
+      {
+        "value": "HUNYUAN_PRODUCTION_READY.md",
+        "type": "file"
+      },
+      {
+        "value": "PRODUCT_LOOP.md",
+        "type": "file"
+      },
+      {
+        "value": "BUSINESS_MODEL.md",
+        "type": "file"
+      },
+      {
+        "value": "DATA_METRICS_DESIGN.md",
+        "type": "file"
+      },
+      {
+        "value": "PROJECT_EVIDENCE_MAP.md",
+        "type": "file"
+      },
+      {
+        "value": "ai-core/AI_AGENT_CORE_ARCHITECTURE.md",
+        "type": "file"
+      },
+      {
+        "value": "vision-agent/README.md",
+        "type": "file"
+      }
+    ],
+    "include": []
+  },
+  "setting": {
+    "es6": true,
+    "urlCheck": true,
+    "minified": true,
+    "postcss": false,
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "enhance": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "ignoreDevUnusedFiles": false,
+    "swc": false,
+    "disableSWC": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.17.1",
+  "appid": "wx51184e5233d28f21",
+  "projectname": "helan-youling",
+  "simulatorPluginLibVersion": {},
+  "editorSetting": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+  "cloudfunctionRoot": "cloudfunctions/"
+}

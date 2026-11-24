@@ -1,0 +1,67 @@
+<view class="page">
+  <view class="hero">
+    <view class="eyebrow">SMART GIFT MATCH</view>
+    <view class="title">原创设计推荐助手</view>
+    <view class="subtitle">
+      面对不了解宁夏文化、想探索原创IP设计的用户，平台通过多维偏好生成IP设计推荐与双语祝福卡。
+    </view>
+  </view>
+
+  <block wx:for="{{groups}}" wx:key="key">
+    <view class="card section">
+      <view class="section-title">{{item.title}}</view>
+
+      <view class="option-wrap">
+        <block wx:for="{{item.options}}" wx:for-item="opt" wx:key="label">
+          <view class="{{opt.className}}" data-key="{{item.key}}" data-value="{{opt.label}}" bindtap="selectOption">
+            {{opt.label}}
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+
+  <view class="card section">
+    <view class="section-title">当前选择</view>
+
+    <view class="preview-line">
+      <text class="preview-label">身份：</text>
+      <text class="preview-value">{{form.userType}}</text>
+    </view>
+
+    <view class="preview-line">
+      <text class="preview-label">范围：</text>
+      <text class="preview-value">{{form.budget}}</text>
+    </view>
+
+    <view class="preview-line">
+      <text class="preview-label">用途：</text>
+      <text class="preview-value">{{form.purpose}}</text>
+    </view>
+
+    <view class="preview-line">
+      <text class="preview-label">对象：</text>
+      <text class="preview-value">{{form.recipient}}</text>
+    </view>
+
+    <view class="preview-line">
+      <text class="preview-label">风格：</text>
+      <text class="preview-value">{{form.style}}</text>
+    </view>
+
+    <view class="preview-line">
+      <text class="preview-label">需求：</text>
+      <text class="preview-value">{{form.need}}</text>
+    </view>
+  </view>
+
+  <view class="card section">
+    <view class="section-title">推荐说明</view>
+    <view class="subtitle dark">
+      本功能由透明的本地偏好规则生成，帮助你发现适合收藏的原创设计；旅行规划与萌宠讲解请前往“AI 灵游”。
+    </view>
+  </view>
+
+  <button class="btn btn-primary btn-full" bindtap="submitRecommend">生成推荐方案</button>
+  <button class="btn btn-secondary btn-full" bindtap="goBackHome">返回首页</button>
+</view>

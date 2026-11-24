@@ -1,0 +1,6 @@
+const {createExperience}=require('../../core/contracts')
+module.exports=[
+  createExperience({experienceId:'desert-river-day',placeId:'buyer-configured',type:'one-day-experience',durationClass:'one-day',visitorFit:['first-visit','family','photo'],timeOfDay:['morning','afternoon'],indoorOutdoor:'outdoor',intensity:'balanced',familyFit:true,storyIds:['yellow-river-desert'],evidenceIds:['shapotou-landscape'],realtimeRequired:false,bookableExternally:false,commercialContext:'EXPERIENCE_LAYER'}),
+  createExperience({experienceId:'sunset-river-desert',placeId:'buyer-configured',type:'sunset-experience',durationClass:'one-day',visitorFit:['couple','photo','relaxed'],timeOfDay:['sunset'],indoorOutdoor:'outdoor',intensity:'slow',familyFit:true,storyIds:['yellow-river-desert'],evidenceIds:['shapotou-landscape'],realtimeRequired:false,bookableExternally:false,commercialContext:'EXPERIENCE_LAYER'}),
+  createExperience({experienceId:'star-night',placeId:'buyer-configured',type:'night-experience',durationClass:'overnight',visitorFit:['couple','hotel-guest','relaxed'],timeOfDay:['sunset','night'],indoorOutdoor:'mixed',intensity:'slow',familyFit:true,storyIds:['desert-night'],evidenceIds:['shapotou-night'],realtimeRequired:true,bookableExternally:false,commercialContext:'HOTEL_CONTEXT'})
+]

@@ -1,0 +1,2 @@
+.language-options{display:flex;flex-direction:column;gap:18rpx}.language-option{min-height:92rpx;white-space:normal;line-height:1.5}.language-option.selected{border:2rpx solid #8b5a2b}.language-page.rtl{text-align:right;direction:rtl}
+.language-page button{width:100%;height:auto;min-height:84rpx;box-sizing:border-box;padding:14rpx 20rpx;line-height:1.4;white-space:normal;overflow-wrap:anywhere;word-break:normal}
